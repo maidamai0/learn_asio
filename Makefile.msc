@@ -1,8 +1,8 @@
 !ifndef BOOSTDIR
 BOOSTDIR = ../../boost_1_34_1
 !endif
-
-COMMON_CXXFLAGS = -nologo -EHac -GR -I. -I../include
+STANDALONE = 1
+COMMON_CXXFLAGS = -nologo -EHac -GR -I. -I asio-1.12.2/include
 
 !ifdef WARNINGS
 WARNINGS_CXXFLAGS = -W4 -wd4512 -wd4447
