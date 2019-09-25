@@ -40,6 +40,9 @@ private:
         {
           if (!ec)
           {
+            std::cout << "got:\n";
+            std::cout.write(data_, length);
+            std::cout << std::endl;
             do_write(length);
           }
         });
