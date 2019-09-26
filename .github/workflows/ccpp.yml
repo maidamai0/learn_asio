@@ -1,4 +1,4 @@
-name: :LearnAsioCI
+name: LearnAsioCI
 
 on: [push]
 
