@@ -11,10 +11,15 @@
 #include <iostream>
 #include <string>
 #include <asio.hpp>
+
 #include "server.hpp"
+#include "http_parser.h"
 
 int main(int argc, char* argv[])
 {
+  http_parser_settings setting;
+  http_parser_settings_init(&setting);
+  
   try
   {
     // Check command line arguments.

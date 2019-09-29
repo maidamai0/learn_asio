@@ -4,8 +4,7 @@ project(learn_asio)
 
 add_definitions(-DASIO_STANDALONE)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/asio-1.12.2/include)
-
-set(CMAKE_CXX_STANDARD 17)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/http_parser)
 
 # generate compile_commands.json if possible
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -15,5 +14,34 @@ if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
     link_libraries(pthread)
 endif()
 
+# warning flags
+# all warning message specified here will not be allowed in code
+# TODO Add -Wconversion
+set(WARNING "-Wall -Werror -Wpedantic -Wextra")
 
+if(CMAKE_COMPILER_IS_GNUCC AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 7.0)
+set(WARNING "${WARNING} -Wshadow=local")
+message("g++ version greater than 7.0 use -Wshadow=local")
+endif()
+
+# c++ version
+set(CXX_VERSION "-std=c++17")
+
+# other common compile falgs
+set(OTHER_COMPILE_FLAGS "-fexceptions")
+
+# default c++ compile flags
+set(COMMON_COMPILE_FLAGS "${WARNING} ${OTHER_COMPILE_FLAGS} ${CXX_VERSION}")
+
+# debug compile flags
+set(CMAKE_CXX_FLAGS_DEBUG   "-g -O0 ${COMMON_COMPILE_FLAGS}")
+
+# release compile flags
+set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O2 ${COMMON_COMPILE_FLAGS}")
+
+# default c++ compile flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
+
+
+add_subdirectory(http_parser)
 add_subdirectory(examples)

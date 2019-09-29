@@ -114,12 +114,12 @@ private:
   {
     asio::async_read(socket_,
         asio::buffer(reply_, length),
-        [this](const std::error_code& error, std::size_t length)
+        [this](const std::error_code& error, std::size_t len)
         {
           if (!error)
           {
             std::cout << "Reply: ";
-            std::cout.write(reply_, length);
+            std::cout.write(reply_, len);
             std::cout << "\n";
           }
           else

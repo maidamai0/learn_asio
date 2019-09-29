@@ -13,6 +13,7 @@
 
 #include <asio.hpp>
 #include <string>
+
 #include "connection.hpp"
 #include "connection_manager.hpp"
 #include "request_handler.hpp"
@@ -41,6 +42,8 @@ private:
 
   /// Wait for a request to stop the server.
   void do_await_stop();
+
+private:
 
   /// The io_context used to perform asynchronous operations.
   asio::io_context io_context_;
