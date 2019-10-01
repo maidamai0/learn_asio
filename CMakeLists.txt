@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(learn_asio)
 
 add_definitions(-DASIO_STANDALONE)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/asio-1.12.2/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/http_parser)
 
@@ -45,3 +46,4 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
 
 add_subdirectory(http_parser)
 add_subdirectory(examples)
+add_subdirectory(threads)
