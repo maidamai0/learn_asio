@@ -2,3 +2,5 @@ build/*
 .vscode/settings.json
 *.exe
 *.obj
+# qt project configuration file
+*.user
