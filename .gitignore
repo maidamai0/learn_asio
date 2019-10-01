@@ -4,3 +4,6 @@ build/*
 *.obj
 # qt project configuration file
 *.user
+
+# soft link of compile_commands.json used for clangd
+compile_commands.json
