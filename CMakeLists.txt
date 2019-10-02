@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(learn_asio)
 
 add_definitions(-DASIO_STANDALONE)
+add_definitions(-DASIO_NO_DEPRECATED)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/asio-1.12.2/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/http_parser)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/fmt_6_0_0/include)
