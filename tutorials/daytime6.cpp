@@ -70,8 +70,7 @@ class UdpServer {
  private:
   udp::socket socket_;
   udp::endpoint remote_endpoint_;
-  std::array<char, 1> recv_buffer_{
-      0};  // what happens if cliend send more data?
+  std::array<char, 1> recv_buffer_{0};
 };
 
 void handler(asio::io_context& io_ctx, const asio::error_code&,
