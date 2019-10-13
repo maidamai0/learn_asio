@@ -11,8 +11,12 @@
 #ifndef ASIO_DETAIL_IMPL_EPOLL_REACTOR_HPP
 #define ASIO_DETAIL_IMPL_EPOLL_REACTOR_HPP
 
+// reading start
+#include "asio/detail/epoll_reactor.hpp"
+// reading end
+
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
-# pragma once
+#pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #if defined(ASIO_HAS_EPOLL)
@@ -23,26 +27,23 @@ namespace asio {
 namespace detail {
 
 template <typename Time_Traits>
-void epoll_reactor::add_timer_queue(timer_queue<Time_Traits>& queue)
-{
+void epoll_reactor::add_timer_queue(timer_queue<Time_Traits> &queue) {
   do_add_timer_queue(queue);
 }
 
 template <typename Time_Traits>
-void epoll_reactor::remove_timer_queue(timer_queue<Time_Traits>& queue)
-{
+void epoll_reactor::remove_timer_queue(timer_queue<Time_Traits> &queue) {
   do_remove_timer_queue(queue);
 }
 
 template <typename Time_Traits>
-void epoll_reactor::schedule_timer(timer_queue<Time_Traits>& queue,
-    const typename Time_Traits::time_type& time,
-    typename timer_queue<Time_Traits>::per_timer_data& timer, wait_op* op)
-{
+void epoll_reactor::schedule_timer(
+    timer_queue<Time_Traits> &queue,
+    const typename Time_Traits::time_type &time,
+    typename timer_queue<Time_Traits>::per_timer_data &timer, wait_op *op) {
   mutex::scoped_lock lock(mutex_);
 
-  if (shutdown_)
-  {
+  if (shutdown_) {
     scheduler_.post_immediate_completion(op, false);
     return;
   }
@@ -54,10 +55,10 @@ void epoll_reactor::schedule_timer(timer_queue<Time_Traits>& queue,
 }
 
 template <typename Time_Traits>
-std::size_t epoll_reactor::cancel_timer(timer_queue<Time_Traits>& queue,
-    typename timer_queue<Time_Traits>::per_timer_data& timer,
-    std::size_t max_cancelled)
-{
+std::size_t epoll_reactor::cancel_timer(
+    timer_queue<Time_Traits> &queue,
+    typename timer_queue<Time_Traits>::per_timer_data &timer,
+    std::size_t max_cancelled) {
   mutex::scoped_lock lock(mutex_);
   op_queue<operation> ops;
   std::size_t n = queue.cancel_timer(timer, ops, max_cancelled);
@@ -67,10 +68,10 @@ std::size_t epoll_reactor::cancel_timer(timer_queue<Time_Traits>& queue,
 }
 
 template <typename Time_Traits>
-void epoll_reactor::move_timer(timer_queue<Time_Traits>& queue,
-    typename timer_queue<Time_Traits>::per_timer_data& target,
-    typename timer_queue<Time_Traits>::per_timer_data& source)
-{
+void epoll_reactor::move_timer(
+    timer_queue<Time_Traits> &queue,
+    typename timer_queue<Time_Traits>::per_timer_data &target,
+    typename timer_queue<Time_Traits>::per_timer_data &source) {
   mutex::scoped_lock lock(mutex_);
   op_queue<operation> ops;
   queue.cancel_timer(target, ops);

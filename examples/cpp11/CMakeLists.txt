@@ -1,3 +1,5 @@
 add_subdirectory(http)
 add_subdirectory(ssl)
 add_subdirectory(timers)
+add_subdirectory(chat)
+add_subdirectory(executors)

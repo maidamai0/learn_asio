@@ -12,28 +12,28 @@
 #define ASIO_IO_CONTEXT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
-# pragma once
+#pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
-#include "asio/detail/config.hpp"
-#include <cstddef>
-#include <stdexcept>
-#include <typeinfo>
 #include "asio/async_result.hpp"
+#include "asio/detail/config.hpp"
 #include "asio/detail/noncopyable.hpp"
 #include "asio/detail/wrapped_handler.hpp"
 #include "asio/error_code.hpp"
 #include "asio/execution_context.hpp"
+#include <cstddef>
+#include <stdexcept>
+#include <typeinfo>
 
 #if defined(ASIO_HAS_CHRONO)
-# include "asio/detail/chrono.hpp"
+#include "asio/detail/chrono.hpp"
 #endif // defined(ASIO_HAS_CHRONO)
 
 #if defined(ASIO_WINDOWS) || defined(__CYGWIN__)
-# include "asio/detail/winsock_init.hpp"
-#elif defined(__sun) || defined(__QNX__) || defined(__hpux) || defined(_AIX) \
-  || defined(__osf__)
-# include "asio/detail/signal_init.hpp"
+#include "asio/detail/winsock_init.hpp"
+#elif defined(__sun) || defined(__QNX__) || defined(__hpux) ||                 \
+    defined(_AIX) || defined(__osf__)
+#include "asio/detail/signal_init.hpp"
 #endif
 
 #include "asio/detail/push_options.hpp"
@@ -42,10 +42,10 @@ namespace asio {
 
 namespace detail {
 #if defined(ASIO_HAS_IOCP)
-  typedef class win_iocp_io_context io_context_impl;
-  class win_iocp_overlapped_ptr;
+typedef class win_iocp_io_context io_context_impl;
+class win_iocp_overlapped_ptr;
 #else
-  typedef class scheduler io_context_impl;
+typedef class scheduler io_context_impl;
 #endif
 } // namespace detail
 
@@ -175,11 +175,9 @@ namespace detail {
  * ...
  * work.reset(); // Allow run() to exit. @endcode
  */
-class io_context
-  : public execution_context
-{
+class io_context : public execution_context {
 private:
-  typedef detail::io_context_impl impl_type;
+  typedef detail::io_context_impl impl_type; // scheduler
 #if defined(ASIO_HAS_IOCP)
   friend class detail::win_iocp_overlapped_ptr;
 #endif
@@ -307,7 +305,7 @@ public:
    * The poll() function may also be used to dispatch ready handlers, but
    * without blocking.
    */
-  ASIO_DECL count_type run(asio::error_code& ec);
+  ASIO_DECL count_type run(asio::error_code &ec);
 #endif // !defined(ASIO_NO_DEPRECATED)
 
 #if defined(ASIO_HAS_CHRONO) || defined(GENERATING_DOCUMENTATION)
@@ -323,7 +321,7 @@ public:
    * @return The number of handlers that were executed.
    */
   template <typename Rep, typename Period>
-  std::size_t run_for(const chrono::duration<Rep, Period>& rel_time);
+  std::size_t run_for(const chrono::duration<Rep, Period> &rel_time);
 
   /// Run the io_context object's event processing loop until a specified time.
   /**
@@ -336,7 +334,7 @@ public:
    * @return The number of handlers that were executed.
    */
   template <typename Clock, typename Duration>
-  std::size_t run_until(const chrono::time_point<Clock, Duration>& abs_time);
+  std::size_t run_until(const chrono::time_point<Clock, Duration> &abs_time);
 #endif // defined(ASIO_HAS_CHRONO) || defined(GENERATING_DOCUMENTATION)
 
   /// Run the io_context object's event processing loop to execute at most one
@@ -378,7 +376,7 @@ public:
    * poll_one() on the same io_context object may introduce the potential for
    * deadlock. It is the caller's reponsibility to avoid this.
    */
-  ASIO_DECL count_type run_one(asio::error_code& ec);
+  ASIO_DECL count_type run_one(asio::error_code &ec);
 #endif // !defined(ASIO_NO_DEPRECATED)
 
 #if defined(ASIO_HAS_CHRONO) || defined(GENERATING_DOCUMENTATION)
@@ -394,7 +392,7 @@ public:
    * @return The number of handlers that were executed.
    */
   template <typename Rep, typename Period>
-  std::size_t run_one_for(const chrono::duration<Rep, Period>& rel_time);
+  std::size_t run_one_for(const chrono::duration<Rep, Period> &rel_time);
 
   /// Run the io_context object's event processing loop until a specified time
   /// to execute at most one handler.
@@ -408,8 +406,8 @@ public:
    * @return The number of handlers that were executed.
    */
   template <typename Clock, typename Duration>
-  std::size_t run_one_until(
-      const chrono::time_point<Clock, Duration>& abs_time);
+  std::size_t
+  run_one_until(const chrono::time_point<Clock, Duration> &abs_time);
 #endif // defined(ASIO_HAS_CHRONO) || defined(GENERATING_DOCUMENTATION)
 
   /// Run the io_context object's event processing loop to execute ready
@@ -433,7 +431,7 @@ public:
    *
    * @return The number of handlers that were executed.
    */
-  ASIO_DECL count_type poll(asio::error_code& ec);
+  ASIO_DECL count_type poll(asio::error_code &ec);
 #endif // !defined(ASIO_NO_DEPRECATED)
 
   /// Run the io_context object's event processing loop to execute one ready
@@ -457,7 +455,7 @@ public:
    *
    * @return The number of handlers that were executed.
    */
-  ASIO_DECL count_type poll_one(asio::error_code& ec);
+  ASIO_DECL count_type poll_one(asio::error_code &ec);
 #endif // !defined(ASIO_NO_DEPRECATED)
 
   /// Stop the io_context object's event processing loop.
@@ -532,7 +530,7 @@ public:
    * throws an exception.
    */
   template <typename LegacyCompletionHandler>
-  ASIO_INITFN_RESULT_TYPE(LegacyCompletionHandler, void ())
+  ASIO_INITFN_RESULT_TYPE(LegacyCompletionHandler, void())
   dispatch(ASIO_MOVE_ARG(LegacyCompletionHandler) handler);
 
   /// (Deprecated: Use asio::post().) Request the io_context to invoke
@@ -559,7 +557,7 @@ public:
    * throws an exception.
    */
   template <typename LegacyCompletionHandler>
-  ASIO_INITFN_RESULT_TYPE(LegacyCompletionHandler, void ())
+  ASIO_INITFN_RESULT_TYPE(LegacyCompletionHandler, void())
   post(ASIO_MOVE_ARG(LegacyCompletionHandler) handler);
 
   /// (Deprecated: Use asio::bind_executor().) Create a new handler that
@@ -588,37 +586,35 @@ public:
 #if defined(GENERATING_DOCUMENTATION)
   unspecified
 #else
-  detail::wrapped_handler<io_context&, Handler>
+  detail::wrapped_handler<io_context &, Handler>
 #endif
   wrap(Handler handler);
 #endif // !defined(ASIO_NO_DEPRECATED)
 
 private:
   // Helper function to add the implementation.
-  ASIO_DECL impl_type& add_impl(impl_type* impl);
+  ASIO_DECL impl_type &add_impl(impl_type *impl);
 
   // Backwards compatible overload for use with services derived from
   // io_context::service.
-  template <typename Service>
-  friend Service& use_service(io_context& ioc);
+  template <typename Service> friend Service &use_service(io_context &ioc);
 
 #if defined(ASIO_WINDOWS) || defined(__CYGWIN__)
   detail::winsock_init<> init_;
-#elif defined(__sun) || defined(__QNX__) || defined(__hpux) || defined(_AIX) \
-  || defined(__osf__)
+#elif defined(__sun) || defined(__QNX__) || defined(__hpux) ||                 \
+    defined(_AIX) || defined(__osf__)
   detail::signal_init<> init_;
 #endif
 
   // The implementation.
-  impl_type& impl_;
+  impl_type &impl_;
 };
 
 /// Executor used to submit functions to an io_context.
-class io_context::executor_type
-{
+class io_context::executor_type {
 public:
   /// Obtain the underlying execution context.
-  io_context& context() const ASIO_NOEXCEPT;
+  io_context &context() const ASIO_NOEXCEPT;
 
   /// Inform the io_context that it has some outstanding work to do.
   /**
@@ -651,7 +647,7 @@ public:
    * internal storage needed for function invocation.
    */
   template <typename Function, typename Allocator>
-  void dispatch(ASIO_MOVE_ARG(Function) f, const Allocator& a) const;
+  void dispatch(ASIO_MOVE_ARG(Function) f, const Allocator &a) const;
 
   /// Request the io_context to invoke the given function object.
   /**
@@ -667,7 +663,7 @@ public:
    * internal storage needed for function invocation.
    */
   template <typename Function, typename Allocator>
-  void post(ASIO_MOVE_ARG(Function) f, const Allocator& a) const;
+  void post(ASIO_MOVE_ARG(Function) f, const Allocator &a) const;
 
   /// Request the io_context to invoke the given function object.
   /**
@@ -687,7 +683,7 @@ public:
    * internal storage needed for function invocation.
    */
   template <typename Function, typename Allocator>
-  void defer(ASIO_MOVE_ARG(Function) f, const Allocator& a) const;
+  void defer(ASIO_MOVE_ARG(Function) f, const Allocator &a) const;
 
   /// Determine whether the io_context is running in the current thread.
   /**
@@ -700,9 +696,8 @@ public:
   /**
    * Two executors are equal if they refer to the same underlying io_context.
    */
-  friend bool operator==(const executor_type& a,
-      const executor_type& b) ASIO_NOEXCEPT
-  {
+  friend bool operator==(const executor_type &a,
+                         const executor_type &b) ASIO_NOEXCEPT {
     return &a.io_context_ == &b.io_context_;
   }
 
@@ -710,9 +705,8 @@ public:
   /**
    * Two executors are equal if they refer to the same underlying io_context.
    */
-  friend bool operator!=(const executor_type& a,
-      const executor_type& b) ASIO_NOEXCEPT
-  {
+  friend bool operator!=(const executor_type &a,
+                         const executor_type &b) ASIO_NOEXCEPT {
     return &a.io_context_ != &b.io_context_;
   }
 
@@ -720,10 +714,10 @@ private:
   friend class io_context;
 
   // Constructor.
-  explicit executor_type(io_context& i) : io_context_(i) {}
+  explicit executor_type(io_context &i) : io_context_(i) {}
 
   // The underlying io_context.
-  io_context& io_context_;
+  io_context &io_context_;
 };
 
 #if !defined(ASIO_NO_DEPRECATED)
@@ -738,8 +732,7 @@ private:
  * The work class is copy-constructible so that it may be used as a data member
  * in a handler class. It is not assignable.
  */
-class io_context::work
-{
+class io_context::work {
 public:
   /// Constructor notifies the io_context that work is starting.
   /**
@@ -747,7 +740,7 @@ public:
    * This ensures that the io_context object's run() function will not exit
    * while the work is underway.
    */
-  explicit work(asio::io_context& io_context);
+  explicit work(asio::io_context &io_context);
 
   /// Copy constructor notifies the io_context that work is starting.
   /**
@@ -755,7 +748,7 @@ public:
    * This ensures that the io_context object's run() function will not exit
    * while the work is underway.
    */
-  work(const work& other);
+  work(const work &other);
 
   /// Destructor notifies the io_context that the work is complete.
   /**
@@ -766,32 +759,30 @@ public:
   ~work();
 
   /// Get the io_context associated with the work.
-  asio::io_context& get_io_context();
+  asio::io_context &get_io_context();
 
   /// (Deprecated: Use get_io_context().) Get the io_context associated with the
   /// work.
-  asio::io_context& get_io_service();
+  asio::io_context &get_io_service();
 
 private:
   // Prevent assignment.
-  void operator=(const work& other);
+  void operator=(const work &other);
 
   // The io_context implementation.
-  detail::io_context_impl& io_context_impl_;
+  detail::io_context_impl &io_context_impl_;
 };
 #endif // !defined(ASIO_NO_DEPRECATED)
 
 /// Base class for all io_context services.
-class io_context::service
-  : public execution_context::service
-{
+class io_context::service : public execution_context::service {
 public:
   /// Get the io_context object that owns the service.
-  asio::io_context& get_io_context();
+  asio::io_context &get_io_context();
 
 #if !defined(ASIO_NO_DEPRECATED)
   /// Get the io_context object that owns the service.
-  asio::io_context& get_io_service();
+  asio::io_context &get_io_service();
 #endif // !defined(ASIO_NO_DEPRECATED)
 
 private:
@@ -810,8 +801,7 @@ private:
    * This function is not a pure virtual so that services only have to
    * implement it if necessary. The default implementation does nothing.
    */
-  ASIO_DECL virtual void notify_fork(
-      execution_context::fork_event event);
+  ASIO_DECL virtual void notify_fork(execution_context::fork_event event);
 
 #if !defined(ASIO_NO_DEPRECATED)
   /// (Deprecated: Use notify_fork().) Handle notification of a fork-related
@@ -820,8 +810,7 @@ private:
    * This function is not a pure virtual so that services only have to
    * implement it if necessary. The default implementation does nothing.
    */
-  ASIO_DECL virtual void fork_service(
-      execution_context::fork_event event);
+  ASIO_DECL virtual void fork_service(execution_context::fork_event event);
 #endif // !defined(ASIO_NO_DEPRECATED)
 
 protected:
@@ -829,7 +818,7 @@ protected:
   /**
    * @param owner The io_context object that owns the service.
    */
-  ASIO_DECL service(asio::io_context& owner);
+  ASIO_DECL service(asio::io_context &owner);
 
   /// Destructor.
   ASIO_DECL virtual ~service();
@@ -838,22 +827,16 @@ protected:
 namespace detail {
 
 // Special service base class to keep classes header-file only.
-template <typename Type>
-class service_base
-  : public asio::io_context::service
-{
+template <typename Type> class service_base : public asio::io_context::service {
 public:
   static asio::detail::service_id<Type> id;
 
   // Constructor.
-  service_base(asio::io_context& io_context)
-    : asio::io_context::service(io_context)
-  {
-  }
+  service_base(asio::io_context &io_context)
+      : asio::io_context::service(io_context) {}
 };
 
-template <typename Type>
-asio::detail::service_id<Type> service_base<Type>::id;
+template <typename Type> asio::detail::service_id<Type> service_base<Type>::id;
 
 } // namespace detail
 } // namespace asio
@@ -862,15 +845,15 @@ asio::detail::service_id<Type> service_base<Type>::id;
 
 #include "asio/impl/io_context.hpp"
 #if defined(ASIO_HEADER_ONLY)
-# include "asio/impl/io_context.ipp"
+#include "asio/impl/io_context.ipp"
 #endif // defined(ASIO_HEADER_ONLY)
 
 // If both io_context.hpp and strand.hpp have been included, automatically
 // include the header file needed for the io_context::strand class.
 #if !defined(ASIO_NO_EXTENSIONS)
-# if defined(ASIO_STRAND_HPP)
-#  include "asio/io_context_strand.hpp"
-# endif // defined(ASIO_STRAND_HPP)
+#if defined(ASIO_STRAND_HPP)
+#include "asio/io_context_strand.hpp"
+#endif // defined(ASIO_STRAND_HPP)
 #endif // !defined(ASIO_NO_EXTENSIONS)
 
 #endif // ASIO_IO_CONTEXT_HPP

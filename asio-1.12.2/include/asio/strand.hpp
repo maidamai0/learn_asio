@@ -12,8 +12,8 @@
 #define ASIO_STRAND_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
-# pragma once
-#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+#  pragma once
+#endif  // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "asio/detail/config.hpp"
 #include "asio/detail/strand_executor_service.hpp"
@@ -24,10 +24,10 @@
 namespace asio {
 
 /// Provides serialised function invocation for any executor type.
-template <typename Executor>
-class strand
-{
-public:
+/// Strand itslef can be used as a executor because it implemented several
+/// interface,see executor_memfns_base and executor for detail
+template <typename Executor> class strand {
+ public:
   /// The type of the underlying executor.
   typedef Executor inner_executor_type;
 
@@ -37,26 +37,19 @@ public:
    * constructible.
    */
   strand()
-    : executor_(),
-      impl_(use_service<detail::strand_executor_service>(
-            executor_.context()).create_implementation())
-  {
-  }
+      : executor_(),
+        impl_(use_service<detail::strand_executor_service>(executor_.context())
+                  .create_implementation()) {}
 
   /// Construct a strand for the specified executor.
   explicit strand(const Executor& e)
-    : executor_(e),
-      impl_(use_service<detail::strand_executor_service>(
-            executor_.context()).create_implementation())
-  {
-  }
+      : executor_(e),
+        impl_(use_service<detail::strand_executor_service>(executor_.context())
+                  .create_implementation()) {}
 
   /// Copy constructor.
-  strand(const strand& other) ASIO_NOEXCEPT
-    : executor_(other.executor_),
-      impl_(other.impl_)
-  {
-  }
+  strand(const strand& other) ASIO_NOEXCEPT : executor_(other.executor_),
+                                              impl_(other.impl_) {}
 
   /// Converting constructor.
   /**
@@ -64,16 +57,12 @@ public:
    * to @c Executor.
    */
   template <class OtherExecutor>
-  strand(
-      const strand<OtherExecutor>& other) ASIO_NOEXCEPT
-    : executor_(other.executor_),
-      impl_(other.impl_)
-  {
-  }
+  strand(const strand<OtherExecutor>& other) ASIO_NOEXCEPT
+      : executor_(other.executor_),
+        impl_(other.impl_) {}
 
   /// Assignment operator.
-  strand& operator=(const strand& other) ASIO_NOEXCEPT
-  {
+  strand& operator=(const strand& other) ASIO_NOEXCEPT {
     executor_ = other.executor_;
     impl_ = other.impl_;
     return *this;
@@ -85,9 +74,7 @@ public:
    * convertible to @c Executor.
    */
   template <class OtherExecutor>
-  strand& operator=(
-      const strand<OtherExecutor>& other) ASIO_NOEXCEPT
-  {
+  strand& operator=(const strand<OtherExecutor>& other) ASIO_NOEXCEPT {
     executor_ = other.executor_;
     impl_ = other.impl_;
     return *this;
@@ -96,10 +83,8 @@ public:
 #if defined(ASIO_HAS_MOVE) || defined(GENERATING_DOCUMENTATION)
   /// Move constructor.
   strand(strand&& other) ASIO_NOEXCEPT
-    : executor_(ASIO_MOVE_CAST(Executor)(other.executor_)),
-      impl_(ASIO_MOVE_CAST(implementation_type)(other.impl_))
-  {
-  }
+      : executor_(ASIO_MOVE_CAST(Executor)(other.executor_)),
+        impl_(ASIO_MOVE_CAST(implementation_type)(other.impl_)) {}
 
   /// Converting move constructor.
   /**
@@ -108,14 +93,11 @@ public:
    */
   template <class OtherExecutor>
   strand(strand<OtherExecutor>&& other) ASIO_NOEXCEPT
-    : executor_(ASIO_MOVE_CAST(OtherExecutor)(other)),
-      impl_(ASIO_MOVE_CAST(implementation_type)(other.impl_))
-  {
-  }
+      : executor_(ASIO_MOVE_CAST(OtherExecutor)(other)),
+        impl_(ASIO_MOVE_CAST(implementation_type)(other.impl_)) {}
 
   /// Move assignment operator.
-  strand& operator=(strand&& other) ASIO_NOEXCEPT
-  {
+  strand& operator=(strand&& other) ASIO_NOEXCEPT {
     executor_ = ASIO_MOVE_CAST(Executor)(other);
     impl_ = ASIO_MOVE_CAST(implementation_type)(other.impl_);
     return *this;
@@ -127,29 +109,23 @@ public:
    * convertible to @c Executor.
    */
   template <class OtherExecutor>
-  strand& operator=(
-      const strand<OtherExecutor>&& other) ASIO_NOEXCEPT
-  {
+  strand& operator=(const strand<OtherExecutor>&& other) ASIO_NOEXCEPT {
     executor_ = ASIO_MOVE_CAST(OtherExecutor)(other);
     impl_ = ASIO_MOVE_CAST(implementation_type)(other.impl_);
     return *this;
   }
-#endif // defined(ASIO_HAS_MOVE) || defined(GENERATING_DOCUMENTATION)
+#endif  // defined(ASIO_HAS_MOVE) || defined(GENERATING_DOCUMENTATION)
 
   /// Destructor.
-  ~strand()
-  {
-  }
+  ~strand() {}
 
   /// Obtain the underlying executor.
-  inner_executor_type get_inner_executor() const ASIO_NOEXCEPT
-  {
+  inner_executor_type get_inner_executor() const ASIO_NOEXCEPT {
     return executor_;
   }
 
   /// Obtain the underlying execution context.
-  execution_context& context() const ASIO_NOEXCEPT
-  {
+  execution_context& context() const ASIO_NOEXCEPT {
     return executor_.context();
   }
 
@@ -157,19 +133,13 @@ public:
   /**
    * The strand delegates this call to its underlying executor.
    */
-  void on_work_started() const ASIO_NOEXCEPT
-  {
-    executor_.on_work_started();
-  }
+  void on_work_started() const ASIO_NOEXCEPT { executor_.on_work_started(); }
 
   /// Inform the strand that some work is no longer outstanding.
   /**
    * The strand delegates this call to its underlying executor.
    */
-  void on_work_finished() const ASIO_NOEXCEPT
-  {
-    executor_.on_work_finished();
-  }
+  void on_work_finished() const ASIO_NOEXCEPT { executor_.on_work_finished(); }
 
   /// Request the strand to invoke the given function object.
   /**
@@ -187,10 +157,9 @@ public:
    * internal storage needed for function invocation.
    */
   template <typename Function, typename Allocator>
-  void dispatch(ASIO_MOVE_ARG(Function) f, const Allocator& a) const
-  {
-    detail::strand_executor_service::dispatch(impl_,
-        executor_, ASIO_MOVE_CAST(Function)(f), a);
+  void dispatch(ASIO_MOVE_ARG(Function) f, const Allocator& a) const {
+    detail::strand_executor_service::dispatch(impl_, executor_,
+                                              ASIO_MOVE_CAST(Function)(f), a);
   }
 
   /// Request the strand to invoke the given function object.
@@ -207,10 +176,9 @@ public:
    * internal storage needed for function invocation.
    */
   template <typename Function, typename Allocator>
-  void post(ASIO_MOVE_ARG(Function) f, const Allocator& a) const
-  {
-    detail::strand_executor_service::post(impl_,
-        executor_, ASIO_MOVE_CAST(Function)(f), a);
+  void post(ASIO_MOVE_ARG(Function) f, const Allocator& a) const {
+    detail::strand_executor_service::post(impl_, executor_,
+                                          ASIO_MOVE_CAST(Function)(f), a);
   }
 
   /// Request the strand to invoke the given function object.
@@ -227,10 +195,9 @@ public:
    * internal storage needed for function invocation.
    */
   template <typename Function, typename Allocator>
-  void defer(ASIO_MOVE_ARG(Function) f, const Allocator& a) const
-  {
-    detail::strand_executor_service::defer(impl_,
-        executor_, ASIO_MOVE_CAST(Function)(f), a);
+  void defer(ASIO_MOVE_ARG(Function) f, const Allocator& a) const {
+    detail::strand_executor_service::defer(impl_, executor_,
+                                           ASIO_MOVE_CAST(Function)(f), a);
   }
 
   /// Determine whether the strand is running in the current thread.
@@ -239,8 +206,7 @@ public:
    * submitted to the strand using post(), dispatch() or defer(). Otherwise
    * returns @c false.
    */
-  bool running_in_this_thread() const ASIO_NOEXCEPT
-  {
+  bool running_in_this_thread() const ASIO_NOEXCEPT {
     return detail::strand_executor_service::running_in_this_thread(impl_);
   }
 
@@ -249,8 +215,7 @@ public:
    * Two strands are equal if they refer to the same ordered, non-concurrent
    * state.
    */
-  friend bool operator==(const strand& a, const strand& b) ASIO_NOEXCEPT
-  {
+  friend bool operator==(const strand& a, const strand& b) ASIO_NOEXCEPT {
     return a.impl_ == b.impl_;
   }
 
@@ -259,28 +224,27 @@ public:
    * Two strands are equal if they refer to the same ordered, non-concurrent
    * state.
    */
-  friend bool operator!=(const strand& a, const strand& b) ASIO_NOEXCEPT
-  {
+  friend bool operator!=(const strand& a, const strand& b) ASIO_NOEXCEPT {
     return a.impl_ != b.impl_;
   }
 
-private:
+ private:
   Executor executor_;
   typedef detail::strand_executor_service::implementation_type
-    implementation_type;
+      implementation_type;
   implementation_type impl_;
 };
 
-} // namespace asio
+}  // namespace asio
 
 #include "asio/detail/pop_options.hpp"
 
 // If both io_context.hpp and strand.hpp have been included, automatically
 // include the header file needed for the io_context::strand class.
 #if !defined(ASIO_NO_EXTENSIONS)
-# if defined(ASIO_IO_CONTEXT_HPP)
-#  include "asio/io_context_strand.hpp"
-# endif // defined(ASIO_IO_CONTEXT_HPP)
-#endif // !defined(ASIO_NO_EXTENSIONS)
+#  if defined(ASIO_IO_CONTEXT_HPP)
+#    include "asio/io_context_strand.hpp"
+#  endif  // defined(ASIO_IO_CONTEXT_HPP)
+#endif    // !defined(ASIO_NO_EXTENSIONS)
 
-#endif // ASIO_STRAND_HPP
+#endif  // ASIO_STRAND_HPP
