@@ -188,9 +188,12 @@ std::size_t scheduler::poll(asio::error_code &ec) {
   // We want to support nested calls to poll() and poll_one(), so any handlers
   // that are already on a thread-private queue need to be put on to the main
   // queue now.
-  if (one_thread_)
-    if (thread_info *outer_info = static_cast<thread_info *>(ctx.next_by_key()))
+  if (one_thread_) {
+    if (thread_info *outer_info =
+            static_cast<thread_info *>(ctx.next_by_key())) {
       op_queue_.push(outer_info->private_op_queue);
+    }
+  }
 #endif // defined(ASIO_HAS_THREADS)
 
   std::size_t n = 0;
@@ -363,8 +366,9 @@ std::size_t scheduler::do_run_one(mutex::scoped_lock &lock,
 std::size_t scheduler::do_wait_one(mutex::scoped_lock &lock,
                                    scheduler::thread_info &this_thread,
                                    long usec, const asio::error_code &ec) {
-  if (stopped_)
+  if (stopped_) {
     return 0;
+  }
 
   operation *o = op_queue_.front();
   if (o == 0) {
@@ -397,8 +401,9 @@ std::size_t scheduler::do_wait_one(mutex::scoped_lock &lock,
 
     o = op_queue_.front();
     if (o == &task_operation_) {
-      if (!one_thread_)
+      if (!one_thread_) {
         wakeup_event_.maybe_unlock_and_signal_one(lock);
+      }
       return 0;
     }
   }

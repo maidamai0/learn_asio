@@ -363,17 +363,19 @@
                           </DElement>
                          </base-DElement>
                          <object>{2bcb8883-dde8-4794-bb6a-da2eaa75a986}</object>
-                         <name>asio::detail::service_base</name>
+                         <name>service_base</name>
                          <pos>x:545;y:765</pos>
-                         <rect>x:-80;y:-30;w:160;h:60</rect>
+                         <rect>x:-125;y:-40;w:250;h:80</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <namespace>asio::detail</namespace>
                        <template>
                         <qlist>
                          <item>Type</item>
                         </qlist>
                        </template>
+                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -489,7 +491,7 @@
                          </base-DElement>
                          <object>{645c9450-242b-4fc4-8c76-6bff562b183b}</object>
                          <name>asio::detail::reactive_serial_port_service</name>
-                         <pos>x:530;y:885</pos>
+                         <pos>x:545;y:885</pos>
                          <rect>x:-120;y:-30;w:240;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -526,12 +528,13 @@
                           </DElement>
                          </base-DElement>
                          <object>{c7b20be1-74ef-4b95-894e-700388738944}</object>
-                         <name>asio::detail::reactive_socket_service</name>
-                         <pos>x:815;y:715</pos>
-                         <rect>x:-110;y:-30;w:220;h:60</rect>
+                         <name>reactive_socket_service</name>
+                         <pos>x:785;y:715</pos>
+                         <rect>x:-75;y:-30;w:150;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <namespace>asio::detail</namespace>
                        <template>
                         <qlist>
                          <item>Protocol</item>
@@ -569,12 +572,13 @@
                           </DElement>
                          </base-DElement>
                          <object>{3f7c6263-e7bd-449e-9999-2816adfe57c4}</object>
-                         <name>asio::detail::reactive_socket_service_base</name>
-                         <pos>x:815;y:620</pos>
-                         <rect>x:-125;y:-30;w:250;h:60</rect>
+                         <name>reactive_socket_service_base</name>
+                         <pos>x:780;y:615</pos>
+                         <rect>x:-90;y:-30;w:180;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
+                       <namespace>asio::detail</namespace>
                       </DClass>
                      </instance>
                     </item>
@@ -867,9 +871,56 @@
                       </DAssociation>
                      </instance>
                     </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{d5ef6449-6f59-4fc9-8154-49b3501d29c3}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{b96636e6-1484-4d78-bb9f-068c7c3812a3}</object>
+                         <name>base_implementation_type</name>
+                         <pos>x:775;y:495</pos>
+                         <rect>x:-130;y:-55;w:260;h:110</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio::detail::reactive_socket_service_base</namespace>
+                       <show-all-members>true</show-all-members>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{92f200b3-8907-41d4-87ed-730c2f233350}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{d6e3917f-7dbf-4df1-ba92-5a5156c8a3dc}</object>
+                         <a>{e421c389-9a74-4d0e-b935-25dac864dca7}</a>
+                         <b>{d5ef6449-6f59-4fc9-8154-49b3501d29c3}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
                    </qlist>
                   </elements>
-                  <last-modified>1570717812866</last-modified>
+                  <last-modified>1571482587564</last-modified>
                   <toolbarid>General</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -1047,35 +1098,35 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{03c95236-3fb8-4bd4-b7c2-eefd08c4f2ef}</uid>
+                    <uid>{f02db84b-f8fd-449b-8462-fdb42b0e5347}</uid>
                     <type>2</type>
                     <declaration>template &lt;typename Service&gt;  friend Service&amp; use_service(execution_context&amp; e)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{26b1216e-f76a-4f41-a5f1-8fccbb356b41}</uid>
+                    <uid>{969e1982-d190-4402-86b8-b79e4a95b091}</uid>
                     <type>2</type>
                     <declaration>template &lt;typename Service&gt;  friend Service&amp; use_service(io_context&amp; ioc)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{7876603b-3e2e-4512-b86a-6c5f16239707}</uid>
+                    <uid>{48cbd59f-ff0b-443d-8508-d81c3f266748}</uid>
                     <type>2</type>
                     <declaration>template &lt;typename Service, typename... Args&gt;  friend Service&amp; make_service(execution_context&amp; e,      ASIO_MOVE_ARG(Args)... args)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{be89fc7d-9578-453a-91a1-cc25cd6765d9}</uid>
+                    <uid>{7d40d9aa-c862-4d5a-a52c-009dc489f2af}</uid>
                     <type>2</type>
                     <declaration>template &lt;typename Service&gt;  friend void add_service(execution_context&amp; e, Service* svc)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{530c1721-87ea-4bf7-9c62-f2aa9bc92e3a}</uid>
+                    <uid>{e3141906-8722-46f9-a752-943ec37c0d20}</uid>
                     <type>2</type>
                     <declaration>template &lt;typename Service&gt;  friend bool has_service(execution_context&amp; e)</declaration>
                    </MClassMember>
@@ -1697,7 +1748,7 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{5410a47e-c384-466c-9e0a-3c57c0b057a1}</uid>
+                    <uid>{0aa9e708-fc2b-469a-8397-b05a318508eb}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>op_queue&lt;operation&gt; op_queue_</declaration>
@@ -1705,7 +1756,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{761ff8a0-30a5-4cf6-b05d-a5bd6b07d2db}</uid>
+                    <uid>{ad112ee3-eb0f-4f7c-a5a1-0434d2e69959}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>atomic_count outstanding_work_</declaration>
@@ -1713,7 +1764,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{561092b7-048d-495a-b424-43e4133b8d20}</uid>
+                    <uid>{535a6f2a-2276-45d4-8678-2b6f8d794254}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>typedef conditionally_enabled_mutex mutex</declaration>
@@ -1721,7 +1772,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{89f7e42b-9267-4991-aa15-a64d41281fd0}</uid>
+                    <uid>{48517443-41de-4a3b-88a8-6ae9f468a48b}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>typedef conditionally_enabled_event event</declaration>
@@ -1729,7 +1780,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{0500df85-4179-4a76-ae81-69dd32f032e3}</uid>
+                    <uid>{5682350d-fdba-4959-b7ec-6307a688fd8f}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>typedef scheduler_thread_info thread_info</declaration>
@@ -1782,12 +1833,93 @@
                         </target>
                        </handle>
                       </item>
+                      <item>
+                       <handle>
+                        <uid>{14f01102-f4da-4886-96e6-848f59916d3f}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{14f01102-f4da-4886-96e6-848f59916d3f}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{f7bb1d32-3d30-4539-a400-e87c7b285db3}</a>
+                             <b>{662033c2-5185-413e-9153-09e1baafbc8a}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>1</cardinality>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
                      </qlist>
                     </handles>
                    </handles>
                   </relations>
                  </MObject>
                 </base-MObject>
+                <members>
+                 <qlist>
+                  <item>
+                   <MClassMember>
+                    <uid>{383f532c-f078-400e-b772-8c28f9997864}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>scheduler &amp;scheduler_</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{b57290f4-569b-44ef-b420-129344b3135d}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>mutex mutex_</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{5fbb44b5-772b-4815-9449-19111b7b7ebd}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>select_interrupter interrupter_</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{0a03d896-678f-4093-8fb3-a0daa03a9742}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>int epoll_fd_</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{0f164728-3497-4422-b910-57e087784cca}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>int timer_fd_</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{afaba2a0-5947-4fce-a8f0-585ebafafb2a}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>timer_queue_set timer_queues_</declaration>
+                   </MClassMember>
+                  </item>
+                 </qlist>
+                </members>
                </MClass>
               </instance>
              </target>
@@ -1908,7 +2040,7 @@
                     <uid>{2bcb8883-dde8-4794-bb6a-da2eaa75a986}</uid>
                    </MElement>
                   </base-MElement>
-                  <name>asio::detail::service_base</name>
+                  <name>service_base</name>
                   <relations>
                    <handles>
                     <handles>
@@ -1941,11 +2073,25 @@
                   </relations>
                  </MObject>
                 </base-MObject>
+                <namespace>asio::detail</namespace>
                 <template>
                  <qlist>
                   <item>Type</item>
                  </qlist>
                 </template>
+                <members>
+                 <qlist>
+                  <item>
+                   <MClassMember>
+                    <uid>{227eb0e2-f1bd-474f-8358-3e6af4f22e8a}</uid>
+                    <visibility>1</visibility>
+                    <type>1</type>
+                    <properties>64</properties>
+                    <declaration>asio::detail::service_id&lt;Type&gt; id</declaration>
+                   </MClassMember>
+                  </item>
+                 </qlist>
+                </members>
                </MClass>
               </instance>
              </target>
@@ -2122,7 +2268,7 @@
                     <uid>{c7b20be1-74ef-4b95-894e-700388738944}</uid>
                    </MElement>
                   </base-MElement>
-                  <name>asio::detail::reactive_socket_service</name>
+                  <name>reactive_socket_service</name>
                   <relations>
                    <handles>
                     <handles>
@@ -2171,17 +2317,65 @@
                         </target>
                        </handle>
                       </item>
+                      <item>
+                       <handle>
+                        <uid>{b076576d-bc62-47fa-a202-c6f646dcb26c}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{b076576d-bc62-47fa-a202-c6f646dcb26c}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{c7b20be1-74ef-4b95-894e-700388738944}</a>
+                             <b>{68696f90-95ed-4a6c-b04d-489e131135bc}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>1</cardinality>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
                      </qlist>
                     </handles>
                    </handles>
                   </relations>
                  </MObject>
                 </base-MObject>
+                <namespace>asio::detail</namespace>
                 <template>
                  <qlist>
                   <item>Protocol</item>
                  </qlist>
                 </template>
+                <members>
+                 <qlist>
+                  <item>
+                   <MClassMember>
+                    <uid>{2933cd7c-31a3-4aea-be5f-c231bf128081}</uid>
+                    <type>1</type>
+                    <declaration>typedef Protocol protocol_type</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{87883cc9-3765-46ec-86fc-43fa90c0c418}</uid>
+                    <type>1</type>
+                    <declaration>typedef typename Protocol::endpoint endpoint_type</declaration>
+                   </MClassMember>
+                  </item>
+                 </qlist>
+                </members>
                </MClass>
               </instance>
              </target>
@@ -2200,9 +2394,47 @@
                     <uid>{3f7c6263-e7bd-449e-9999-2816adfe57c4}</uid>
                    </MElement>
                   </base-MElement>
-                  <name>asio::detail::reactive_socket_service_base</name>
+                  <name>reactive_socket_service_base</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{d6e3917f-7dbf-4df1-ba92-5a5156c8a3dc}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{d6e3917f-7dbf-4df1-ba92-5a5156c8a3dc}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{3f7c6263-e7bd-449e-9999-2816adfe57c4}</a>
+                             <b>{b96636e6-1484-4d78-bb9f-068c7c3812a3}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>1</cardinality>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
                  </MObject>
                 </base-MObject>
+                <namespace>asio::detail</namespace>
                </MClass>
               </instance>
              </target>
@@ -3939,7 +4171,7 @@
                          </base-DElement>
                          <object>{32a35ba0-20e5-4fac-a344-155b6f985c11}</object>
                          <name>asio::io_context</name>
-                         <pos>x:385;y:205</pos>
+                         <pos>x:320;y:210</pos>
                          <rect>x:-130;y:-50;w:260;h:100</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -3960,7 +4192,7 @@
                          </base-DElement>
                          <object>{d5722f21-f377-49bd-bb93-7dcd2539ff77}</object>
                          <name>asio::execution_context</name>
-                         <pos>x:380;y:80</pos>
+                         <pos>x:315;y:85</pos>
                          <rect>x:-75;y:-30;w:150;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -3998,7 +4230,7 @@
                          </base-DElement>
                          <object>{662033c2-5185-413e-9153-09e1baafbc8a}</object>
                          <name>asio::detail::scheduler</name>
-                         <pos>x:385;y:335</pos>
+                         <pos>x:320;y:340</pos>
                          <rect>x:-110;y:-35;w:220;h:70</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -4043,7 +4275,7 @@
                          </base-DElement>
                          <object>{f1db5ad0-07ba-4486-ba32-9999bc772c40}</object>
                          <name>io_context::executor_type</name>
-                         <pos>x:730;y:205</pos>
+                         <pos>x:665;y:210</pos>
                          <rect>x:-80;y:-30;w:160;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -4086,7 +4318,7 @@
                          </base-DElement>
                          <object>{546f3cd9-b4e6-47c3-98fa-f352c75bbfd4}</object>
                          <name>asio::io_context::service</name>
-                         <pos>x:720;y:300</pos>
+                         <pos>x:655;y:305</pos>
                          <rect>x:-80;y:-30;w:160;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -4094,9 +4326,53 @@
                       </DClass>
                      </instance>
                     </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{5265e6eb-571f-49e3-90df-7ab62054a2a0}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{2bcb8883-dde8-4794-bb6a-da2eaa75a986}</object>
+                         <name>service_base</name>
+                         <pos>x:655;y:405</pos>
+                         <rect>x:-45;y:-30;w:90;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio::detail</namespace>
+                       <template>
+                        <qlist>
+                         <item>Type</item>
+                        </qlist>
+                       </template>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{2a84a2ea-1299-4367-8768-a9a6ac0c8ba0}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{fc5bbb10-7a90-4adc-afdb-ccbf4990d0c7}</object>
+                         <a>{5265e6eb-571f-49e3-90df-7ab62054a2a0}</a>
+                         <b>{35582dda-bd03-44ca-b716-cda5c908f165}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
                    </qlist>
                   </elements>
-                  <last-modified>1570717768961</last-modified>
+                  <last-modified>1571481105089</last-modified>
                   <toolbarid>General</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -4211,7 +4487,7 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{e9c7d5ad-6e64-47d5-8ff9-7b79af979c7c}</uid>
+                    <uid>{dbd1c6fb-1c32-414e-8f10-880f3ea56c14}</uid>
                     <visibility>1</visibility>
                     <type>1</type>
                     <declaration>typedef class scheduler io_context_impl</declaration>
@@ -4219,7 +4495,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{6195445d-750d-4b6c-8eb1-344903aa1170}</uid>
+                    <uid>{b1ef6afa-1861-470f-b972-ec7e5b40e1c1}</uid>
                     <visibility>1</visibility>
                     <type>1</type>
                     <declaration>typedef detail::io_context_impl impl_type</declaration>
@@ -4227,7 +4503,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{81359ede-3a4d-45ac-a861-66f1a19f3db3}</uid>
+                    <uid>{cf47a62a-2ec5-4916-9c92-fb6968dca017}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>impl_type&amp; impl_</declaration>
@@ -4804,10 +5080,1798 @@
                     <name>epoll_reactor</name>
                    </MObject>
                   </base-MObject>
+                  <elements>
+                   <qlist>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{50dcfd64-701d-48f6-b439-05e44fca1958}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{f7bb1d32-3d30-4539-a400-e87c7b285db3}</object>
+                         <name>asio::detail::epoll_reactor</name>
+                         <pos>x:315;y:185</pos>
+                         <rect>x:-110;y:-75;w:220;h:150</rect>
+                         <visual-role>0</visual-role>
+                         <visual-role2>5</visual-role2>
+                        </DObject>
+                       </base-DObject>
+                       <show-all-members>true</show-all-members>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{781f7d0f-74f1-4275-9fe6-d394f6f4958e}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{662033c2-5185-413e-9153-09e1baafbc8a}</object>
+                         <name>asio::detail::scheduler</name>
+                         <pos>x:115;y:340</pos>
+                         <rect>x:-110;y:-35;w:220;h:70</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{9cb70c15-625f-4748-94d9-f9d1956b8a08}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{14f01102-f4da-4886-96e6-848f59916d3f}</object>
+                         <a>{50dcfd64-701d-48f6-b439-05e44fca1958}</a>
+                         <b>{781f7d0f-74f1-4275-9fe6-d394f6f4958e}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{29dac59e-ffa0-48ef-8ce2-bf10efcb4252}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{d8f82af0-c84e-467b-a6ff-55cd9620bd90}</object>
+                         <name>asio::detail::eventfd_select_interrupter</name>
+                         <pos>x:375;y:340</pos>
+                         <rect>x:-115;y:-30;w:230;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{1343838c-053e-4bd8-80da-ae2ae6236f12}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{ac5c2335-31f2-44e5-bac1-3d75a39dbe4a}</object>
+                         <name>asio::detail::epoll_reactor::descriptor_state</name>
+                         <pos>x:-35;y:585</pos>
+                         <rect>x:-130;y:-30;w:260;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{491f5937-8f89-4a11-a7f6-02cc7d0a4da1}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{9fd22c82-341f-4040-9890-f31c628d68ce}</object>
+                         <name>asio::detail::scheduler_operation</name>
+                         <pos>x:120;y:480</pos>
+                         <rect>x:-100;y:-30;w:200;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{8907a064-5a83-4c5d-84c1-e19f6360508e}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{650daf76-ad54-404e-930e-59713a0ebfea}</object>
+                         <a>{781f7d0f-74f1-4275-9fe6-d394f6f4958e}</a>
+                         <b>{491f5937-8f89-4a11-a7f6-02cc7d0a4da1}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{7d327a13-92a0-4cdf-bcfd-94eeaf126943}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{f37797e2-5433-482d-aa8b-c1853333fe65}</object>
+                         <a>{1343838c-053e-4bd8-80da-ae2ae6236f12}</a>
+                         <b>{491f5937-8f89-4a11-a7f6-02cc7d0a4da1}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{41099c95-795e-4097-b02b-ae684904eada}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{8c17ad39-f9c0-4aa1-9837-79fe57c60e94}</object>
+                         <name>asio::detail::reactor_op</name>
+                         <pos>x:325;y:585</pos>
+                         <rect>x:-75;y:-30;w:150;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{b3c836f9-6512-4449-a797-260fcc7e8266}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{ff166b4b-a543-4dd9-bd29-f4bf757f191a}</object>
+                         <a>{41099c95-795e-4097-b02b-ae684904eada}</a>
+                         <b>{491f5937-8f89-4a11-a7f6-02cc7d0a4da1}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{e418eb2b-c005-457c-b76c-4155aa6e8b23}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{92f0e947-2143-4ace-b6b2-97e541ec31a6}</object>
+                         <a>{1343838c-053e-4bd8-80da-ae2ae6236f12}</a>
+                         <b>{41099c95-795e-4097-b02b-ae684904eada}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>*</cradinality>
+                         <navigable>true</navigable>
+                         <kind>1</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                   </qlist>
+                  </elements>
+                  <last-modified>1571061600882</last-modified>
                   <toolbarid>General</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
                </MCanvasDiagram>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{d8f82af0-c84e-467b-a6ff-55cd9620bd90}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{d8f82af0-c84e-467b-a6ff-55cd9620bd90}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>asio::detail::eventfd_select_interrupter</name>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{ac5c2335-31f2-44e5-bac1-3d75a39dbe4a}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{ac5c2335-31f2-44e5-bac1-3d75a39dbe4a}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>asio::detail::epoll_reactor::descriptor_state</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{f37797e2-5433-482d-aa8b-c1853333fe65}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{f37797e2-5433-482d-aa8b-c1853333fe65}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{ac5c2335-31f2-44e5-bac1-3d75a39dbe4a}</a>
+                             <b>{9fd22c82-341f-4040-9890-f31c628d68ce}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{92f0e947-2143-4ace-b6b2-97e541ec31a6}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{92f0e947-2143-4ace-b6b2-97e541ec31a6}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{ac5c2335-31f2-44e5-bac1-3d75a39dbe4a}</a>
+                             <b>{8c17ad39-f9c0-4aa1-9837-79fe57c60e94}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>*</cardinality>
+                             <navigable>true</navigable>
+                             <kind>1</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{8c17ad39-f9c0-4aa1-9837-79fe57c60e94}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{8c17ad39-f9c0-4aa1-9837-79fe57c60e94}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>asio::detail::reactor_op</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{ff166b4b-a543-4dd9-bd29-f4bf757f191a}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{ff166b4b-a543-4dd9-bd29-f4bf757f191a}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{8c17ad39-f9c0-4aa1-9837-79fe57c60e94}</a>
+                             <b>{9fd22c82-341f-4040-9890-f31c628d68ce}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{27e4f0d6-3c29-4119-8735-86af349783aa}</uid>
+             <target>
+              <instance type="MCanvasDiagram">
+               <MCanvasDiagram>
+                <base-MDiagram>
+                 <MDiagram>
+                  <base-MObject>
+                   <MObject>
+                    <base-MElement>
+                     <MElement>
+                      <uid>{27e4f0d6-3c29-4119-8735-86af349783aa}</uid>
+                     </MElement>
+                    </base-MElement>
+                    <name>io</name>
+                   </MObject>
+                  </base-MObject>
+                  <elements>
+                   <qlist>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{fb62dc5f-16af-43da-ba2b-66933fbbb658}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{b6a0e96c-8205-4573-b5cd-503a7ce6102d}</object>
+                         <name>basic_io_object</name>
+                         <pos>x:375;y:-120</pos>
+                         <rect>x:-220;y:-80;w:440;h:160</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio</namespace>
+                       <template>
+                        <qlist>
+                         <item>IoObjectService</item>
+                        </qlist>
+                       </template>
+                       <show-all-members>true</show-all-members>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{f1c0f8be-de86-43b8-a3a2-62e2ef64d639}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{68696f90-95ed-4a6c-b04d-489e131135bc}</object>
+                         <name>basic_socket_acceptor</name>
+                         <pos>x:290;y:380</pos>
+                         <rect>x:-70;y:-30;w:140;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio</namespace>
+                       <template>
+                        <qlist>
+                         <item>Protocol</item>
+                        </qlist>
+                       </template>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{2c29b93e-516d-499c-af76-f809b378bcab}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{646fefda-6e3a-473c-a8d3-1b433dec70b0}</object>
+                         <a>{f1c0f8be-de86-43b8-a3a2-62e2ef64d639}</a>
+                         <b>{fb62dc5f-16af-43da-ba2b-66933fbbb658}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{7cc9331d-a93f-44f4-9bad-56c01fb1c0d0}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{c7b20be1-74ef-4b95-894e-700388738944}</object>
+                         <name>reactive_socket_service</name>
+                         <pos>x:30;y:50</pos>
+                         <rect>x:-155;y:-55;w:310;h:110</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio::detail</namespace>
+                       <template>
+                        <qlist>
+                         <item>Protocol</item>
+                        </qlist>
+                       </template>
+                       <show-all-members>true</show-all-members>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{4ecbb6c8-3f04-4162-803d-cd1765eb677e}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{9fe11119-cd0b-4cc4-adf5-028e91a080c3}</object>
+                         <a>{fb62dc5f-16af-43da-ba2b-66933fbbb658}</a>
+                         <b>{7cc9331d-a93f-44f4-9bad-56c01fb1c0d0}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{4a0ed451-6e2e-45c9-9a46-0ac715c1fb81}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{db193bb3-9214-4496-9691-57111d63f145}</object>
+                         <name>socket_base</name>
+                         <pos>x:370;y:260</pos>
+                         <rect>x:-45;y:-30;w:90;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio</namespace>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{16e1bb7b-cb6c-4d8b-92a6-2aee627b87ab}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{1d84d102-abc4-4093-9d7b-7fcd5f21cf07}</object>
+                         <a>{f1c0f8be-de86-43b8-a3a2-62e2ef64d639}</a>
+                         <b>{4a0ed451-6e2e-45c9-9a46-0ac715c1fb81}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{29f4a5f4-c7c3-4d06-9378-b3d437269221}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{255d7218-1d5c-4e3f-b7aa-31479ce3aee2}</object>
+                         <name>endpoint</name>
+                         <pos>x:150;y:845</pos>
+                         <rect>x:-40;y:-30;w:80;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio::ip::detail</namespace>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{8c982591-be41-41ba-bc0d-bf3efb5d1a8d}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{1d514d7a-e7dd-408e-8718-bbce553a8424}</object>
+                         <name>basic_endpoint</name>
+                         <pos>x:150;y:730</pos>
+                         <rect>x:-50;y:-30;w:100;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio::ip</namespace>
+                       <template>
+                        <qlist>
+                         <item>InternetProtocol(TransportProtocol)</item>
+                        </qlist>
+                       </template>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{3e525f6b-c33e-4d97-912c-551feeacb116}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{251d62d1-2877-4ba0-9724-0cf0b2a4aab0}</object>
+                         <a>{8c982591-be41-41ba-bc0d-bf3efb5d1a8d}</a>
+                         <b>{29f4a5f4-c7c3-4d06-9378-b3d437269221}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{7c1c4a49-3591-4a78-b37a-afedb4e48e1a}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{19ca8970-1ba5-40be-9bcd-86d291a8e074}</object>
+                         <name>tcp</name>
+                         <pos>x:210;y:550</pos>
+                         <rect>x:-140;y:-70;w:280;h:140</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio::ip</namespace>
+                       <show-all-members>true</show-all-members>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{dc29e409-863d-4128-b15d-2cb49ebe3a5c}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{ad592c9a-c997-41e7-8558-11699e42abcb}</object>
+                         <a>{7c1c4a49-3591-4a78-b37a-afedb4e48e1a}</a>
+                         <b>{8c982591-be41-41ba-bc0d-bf3efb5d1a8d}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{5f68d324-eacc-40fb-802d-0406dd579985}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{3c64e2bb-2e7e-4927-b1aa-a0deb44dc04c}</object>
+                         <a>{7c1c4a49-3591-4a78-b37a-afedb4e48e1a}</a>
+                         <b>{f1c0f8be-de86-43b8-a3a2-62e2ef64d639}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{82dafe6c-88ef-41a7-8185-a7bb7b42a382}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{2c3f7c7c-10fc-403e-b380-cf5f381f2e7d}</object>
+                         <name>basic_stream_socket</name>
+                         <pos>x:495;y:495</pos>
+                         <rect>x:-70;y:-30;w:140;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio</namespace>
+                       <template>
+                        <qlist>
+                         <item>Protocol</item>
+                        </qlist>
+                       </template>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{d8f9af41-abcf-4f28-85fd-2a27e81e7a5c}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{36a03af0-1d9d-4012-b98a-66b58078c4c1}</object>
+                         <name>basic_socket</name>
+                         <pos>x:490;y:380</pos>
+                         <rect>x:-45;y:-30;w:90;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <template>
+                        <qlist>
+                         <item>Protocol</item>
+                        </qlist>
+                       </template>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{64093ee0-347b-4648-a10d-991a268f70ab}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{11482f13-5d66-4e8e-9613-34f3f849374a}</object>
+                         <a>{82dafe6c-88ef-41a7-8185-a7bb7b42a382}</a>
+                         <b>{d8f9af41-abcf-4f28-85fd-2a27e81e7a5c}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{ea7a9745-120a-4514-be94-844fa4ee3535}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{38424b02-47fe-403f-94ed-3e476843ee75}</object>
+                         <a>{d8f9af41-abcf-4f28-85fd-2a27e81e7a5c}</a>
+                         <b>{4a0ed451-6e2e-45c9-9a46-0ac715c1fb81}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{819980bb-9041-4ab8-a120-c3a47564c6e0}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{d904eb12-73cb-4eaf-aee5-2d7930c1e189}</object>
+                         <a>{d8f9af41-abcf-4f28-85fd-2a27e81e7a5c}</a>
+                         <b>{fb62dc5f-16af-43da-ba2b-66933fbbb658}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{dfc3eea1-7aec-4138-b7de-c57680092fc2}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{2d20b808-3d07-4a16-9042-9b81f07a56c2}</object>
+                         <name>basic_resolver</name>
+                         <pos>x:540;y:765</pos>
+                         <rect>x:-50;y:-30;w:100;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio::ip</namespace>
+                       <template>
+                        <qlist>
+                         <item>InternetProtocol</item>
+                        </qlist>
+                       </template>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{72fdd397-3085-49aa-bcae-057b656d670e}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{ffea014e-7a8d-46e7-8df1-11977a7e8bcc}</object>
+                         <name>resolver_base</name>
+                         <pos>x:570;y:630</pos>
+                         <rect>x:-50;y:-30;w:100;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio::ip</namespace>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{c08b1efb-4406-4649-a92b-e81bee3cc5f1}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{ba6cdf8a-7749-4b92-a968-e6fd1154a211}</object>
+                         <a>{dfc3eea1-7aec-4138-b7de-c57680092fc2}</a>
+                         <b>{72fdd397-3085-49aa-bcae-057b656d670e}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{e39017a0-44d5-458d-be8b-9e45c1da02cd}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{a03d7841-c439-4dad-821b-ea6167141703}</object>
+                         <a>{7c1c4a49-3591-4a78-b37a-afedb4e48e1a}</a>
+                         <b>{82dafe6c-88ef-41a7-8185-a7bb7b42a382}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{dcb63361-583c-4d29-b42c-27fff268880a}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{57d7f8bb-df3d-43c9-a6a5-aef9b55f3a46}</object>
+                         <a>{7c1c4a49-3591-4a78-b37a-afedb4e48e1a}</a>
+                         <b>{dfc3eea1-7aec-4138-b7de-c57680092fc2}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{7dba1d24-cf4a-48d9-ae38-e975fa191d9d}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{3f7c6263-e7bd-449e-9999-2816adfe57c4}</object>
+                         <name>reactive_socket_service_base</name>
+                         <pos>x:30;y:-145</pos>
+                         <rect>x:-90;y:-30;w:180;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <namespace>asio::detail</namespace>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DInheritance">
+                      <DInheritance>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{f6bdfcbb-d975-487b-aaaf-0449838664f6}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{8df97964-89ae-498f-ad83-bc9e72f4e223}</object>
+                         <a>{7cc9331d-a93f-44f4-9bad-56c01fb1c0d0}</a>
+                         <b>{7dba1d24-cf4a-48d9-ae38-e975fa191d9d}</b>
+                        </DRelation>
+                       </base-DRelation>
+                      </DInheritance>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{b13ccb63-5c85-427a-a99b-3f51d4438e61}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{ab30bcb4-103e-48e5-b227-3dafec9260f7}</object>
+                         <a>{f1c0f8be-de86-43b8-a3a2-62e2ef64d639}</a>
+                         <b>{7cc9331d-a93f-44f4-9bad-56c01fb1c0d0}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <cradinality>1</cradinality>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                   </qlist>
+                  </elements>
+                  <last-modified>1571482947182</last-modified>
+                  <toolbarid>General</toolbarid>
+                 </MDiagram>
+                </base-MDiagram>
+               </MCanvasDiagram>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{b6a0e96c-8205-4573-b5cd-503a7ce6102d}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{b6a0e96c-8205-4573-b5cd-503a7ce6102d}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>basic_io_object</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{9fe11119-cd0b-4cc4-adf5-028e91a080c3}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{9fe11119-cd0b-4cc4-adf5-028e91a080c3}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{b6a0e96c-8205-4573-b5cd-503a7ce6102d}</a>
+                             <b>{c7b20be1-74ef-4b95-894e-700388738944}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>1</cardinality>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+                <namespace>asio</namespace>
+                <template>
+                 <qlist>
+                  <item>IoObjectService</item>
+                 </qlist>
+                </template>
+                <members>
+                 <qlist>
+                  <item>
+                   <MClassMember>
+                    <uid>{7e33675d-fea4-4b3e-ac1a-d93d98206cd3}</uid>
+                    <type>1</type>
+                    <declaration>typedef IoObjectService service_type</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{6ac2dab4-c90c-49b0-a70e-a95e0b58c346}</uid>
+                    <type>1</type>
+                    <declaration>typedef typename service_type::implementation_type implementation_type</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{9af5d079-b3e0-440e-b2b1-256efaf9e6d5}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>service_type&amp; service_</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{bf021d29-eddb-409c-8351-ef7acb8f117e}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>implementation_type implementation_</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{62c24b44-3642-4f9f-bdab-58382944b029}</uid>
+                    <visibility>2</visibility>
+                    <type>2</type>
+                    <declaration>service_type&amp; get_service()</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{8d0ff4b9-4bd7-45c9-8396-7b61b5013649}</uid>
+                    <visibility>2</visibility>
+                    <type>2</type>
+                    <declaration>implementation_type&amp; get_implementation()</declaration>
+                   </MClassMember>
+                  </item>
+                 </qlist>
+                </members>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{68696f90-95ed-4a6c-b04d-489e131135bc}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{68696f90-95ed-4a6c-b04d-489e131135bc}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>basic_socket_acceptor</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{646fefda-6e3a-473c-a8d3-1b433dec70b0}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{646fefda-6e3a-473c-a8d3-1b433dec70b0}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{68696f90-95ed-4a6c-b04d-489e131135bc}</a>
+                             <b>{b6a0e96c-8205-4573-b5cd-503a7ce6102d}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{1d84d102-abc4-4093-9d7b-7fcd5f21cf07}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{1d84d102-abc4-4093-9d7b-7fcd5f21cf07}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{68696f90-95ed-4a6c-b04d-489e131135bc}</a>
+                             <b>{db193bb3-9214-4496-9691-57111d63f145}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{ab30bcb4-103e-48e5-b227-3dafec9260f7}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{ab30bcb4-103e-48e5-b227-3dafec9260f7}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{68696f90-95ed-4a6c-b04d-489e131135bc}</a>
+                             <b>{c7b20be1-74ef-4b95-894e-700388738944}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>1</cardinality>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+                <namespace>asio</namespace>
+                <template>
+                 <qlist>
+                  <item>Protocol</item>
+                 </qlist>
+                </template>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{db193bb3-9214-4496-9691-57111d63f145}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{db193bb3-9214-4496-9691-57111d63f145}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>socket_base</name>
+                 </MObject>
+                </base-MObject>
+                <namespace>asio</namespace>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{255d7218-1d5c-4e3f-b7aa-31479ce3aee2}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{255d7218-1d5c-4e3f-b7aa-31479ce3aee2}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>endpoint</name>
+                 </MObject>
+                </base-MObject>
+                <namespace>asio::ip::detail</namespace>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{1d514d7a-e7dd-408e-8718-bbce553a8424}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{1d514d7a-e7dd-408e-8718-bbce553a8424}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>basic_endpoint</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{251d62d1-2877-4ba0-9724-0cf0b2a4aab0}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{251d62d1-2877-4ba0-9724-0cf0b2a4aab0}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{1d514d7a-e7dd-408e-8718-bbce553a8424}</a>
+                             <b>{255d7218-1d5c-4e3f-b7aa-31479ce3aee2}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>1</cardinality>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+                <namespace>asio::ip</namespace>
+                <template>
+                 <qlist>
+                  <item>InternetProtocol(TransportProtocol)</item>
+                 </qlist>
+                </template>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{19ca8970-1ba5-40be-9bcd-86d291a8e074}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{19ca8970-1ba5-40be-9bcd-86d291a8e074}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>tcp</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{ad592c9a-c997-41e7-8558-11699e42abcb}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{ad592c9a-c997-41e7-8558-11699e42abcb}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{19ca8970-1ba5-40be-9bcd-86d291a8e074}</a>
+                             <b>{1d514d7a-e7dd-408e-8718-bbce553a8424}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>1</cardinality>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{3c64e2bb-2e7e-4927-b1aa-a0deb44dc04c}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{3c64e2bb-2e7e-4927-b1aa-a0deb44dc04c}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{19ca8970-1ba5-40be-9bcd-86d291a8e074}</a>
+                             <b>{68696f90-95ed-4a6c-b04d-489e131135bc}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>1</cardinality>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{a03d7841-c439-4dad-821b-ea6167141703}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{a03d7841-c439-4dad-821b-ea6167141703}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{19ca8970-1ba5-40be-9bcd-86d291a8e074}</a>
+                             <b>{2c3f7c7c-10fc-403e-b380-cf5f381f2e7d}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>1</cardinality>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{57d7f8bb-df3d-43c9-a6a5-aef9b55f3a46}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{57d7f8bb-df3d-43c9-a6a5-aef9b55f3a46}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{19ca8970-1ba5-40be-9bcd-86d291a8e074}</a>
+                             <b>{2d20b808-3d07-4a16-9042-9b81f07a56c2}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <cardinality>1</cardinality>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+                <namespace>asio::ip</namespace>
+                <members>
+                 <qlist>
+                  <item>
+                   <MClassMember>
+                    <uid>{07b0c32a-6fd6-44f1-9808-3a2f763a39ac}</uid>
+                    <type>1</type>
+                    <declaration>typedef basic_endpoint&lt;tcp&gt; endpoint</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{e75c0edc-015e-4001-8d7f-7b507e381faf}</uid>
+                    <type>1</type>
+                    <declaration>typedef basic_stream_socket&lt;tcp&gt; socket</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{07a9c433-9766-4212-a3ec-562dbfc314c3}</uid>
+                    <type>1</type>
+                    <declaration>typedef basic_socket_acceptor&lt;tcp&gt; acceptor</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{e4b74f93-d636-42c5-8833-656a4aad7070}</uid>
+                    <type>1</type>
+                    <declaration>typedef basic_resolver&lt;tcp&gt; resolver</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{34fe220b-0641-4f22-9ac6-8ced2ad2d9dd}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>int family_</declaration>
+                   </MClassMember>
+                  </item>
+                 </qlist>
+                </members>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{2c3f7c7c-10fc-403e-b380-cf5f381f2e7d}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{2c3f7c7c-10fc-403e-b380-cf5f381f2e7d}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>basic_stream_socket</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{11482f13-5d66-4e8e-9613-34f3f849374a}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{11482f13-5d66-4e8e-9613-34f3f849374a}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{2c3f7c7c-10fc-403e-b380-cf5f381f2e7d}</a>
+                             <b>{36a03af0-1d9d-4012-b98a-66b58078c4c1}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+                <namespace>asio</namespace>
+                <template>
+                 <qlist>
+                  <item>Protocol</item>
+                 </qlist>
+                </template>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{36a03af0-1d9d-4012-b98a-66b58078c4c1}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{36a03af0-1d9d-4012-b98a-66b58078c4c1}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>basic_socket</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{38424b02-47fe-403f-94ed-3e476843ee75}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{38424b02-47fe-403f-94ed-3e476843ee75}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{36a03af0-1d9d-4012-b98a-66b58078c4c1}</a>
+                             <b>{db193bb3-9214-4496-9691-57111d63f145}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{d904eb12-73cb-4eaf-aee5-2d7930c1e189}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{d904eb12-73cb-4eaf-aee5-2d7930c1e189}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{36a03af0-1d9d-4012-b98a-66b58078c4c1}</a>
+                             <b>{b6a0e96c-8205-4573-b5cd-503a7ce6102d}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+                <template>
+                 <qlist>
+                  <item>Protocol</item>
+                 </qlist>
+                </template>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{2d20b808-3d07-4a16-9042-9b81f07a56c2}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{2d20b808-3d07-4a16-9042-9b81f07a56c2}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>basic_resolver</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{ba6cdf8a-7749-4b92-a968-e6fd1154a211}</uid>
+                        <target>
+                         <instance type="MInheritance">
+                          <MInheritance>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{ba6cdf8a-7749-4b92-a968-e6fd1154a211}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{2d20b808-3d07-4a16-9042-9b81f07a56c2}</a>
+                             <b>{ffea014e-7a8d-46e7-8df1-11977a7e8bcc}</b>
+                            </MRelation>
+                           </base-MRelation>
+                          </MInheritance>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+                <namespace>asio::ip</namespace>
+                <template>
+                 <qlist>
+                  <item>InternetProtocol</item>
+                 </qlist>
+                </template>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{ffea014e-7a8d-46e7-8df1-11977a7e8bcc}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{ffea014e-7a8d-46e7-8df1-11977a7e8bcc}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>resolver_base</name>
+                 </MObject>
+                </base-MObject>
+                <namespace>asio::ip</namespace>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{b96636e6-1484-4d78-bb9f-068c7c3812a3}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{b96636e6-1484-4d78-bb9f-068c7c3812a3}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>base_implementation_type</name>
+                 </MObject>
+                </base-MObject>
+                <namespace>asio::detail::reactive_socket_service_base</namespace>
+                <members>
+                 <qlist>
+                  <item>
+                   <MClassMember>
+                    <uid>{ec502413-6557-48ef-bfaf-62ce96501a24}</uid>
+                    <type>1</type>
+                    <declaration>socket_type socket_</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{198e745a-c049-47d9-937e-b441f725c4e4}</uid>
+                    <type>1</type>
+                    <declaration>socket_ops::state_type state_</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{9ac97c64-6b29-4ac7-a818-8dd423ba45b1}</uid>
+                    <type>1</type>
+                    <declaration>reactor::per_descriptor_data reactor_data_</declaration>
+                   </MClassMember>
+                  </item>
+                 </qlist>
+                </members>
+               </MClass>
               </instance>
              </target>
             </handle>
