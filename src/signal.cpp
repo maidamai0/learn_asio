@@ -1,6 +1,5 @@
 #include <asio/io_context.hpp>
 #include <asio/signal_set.hpp>
-
 #include <iostream>
 
 void signal_handler(const asio::error_code& err, int signal_num) {
@@ -8,15 +7,15 @@ void signal_handler(const asio::error_code& err, int signal_num) {
   static unsigned term_num = 0;
   if (!err) {
     switch (signal_num) {
-    case SIGINT:
-      std::cout << "got signal SIGINT " << int_num << " times" << std::endl;
-      break;
-    case SIGTERM: {
-      std::cout << "got signal SIGTERM " << term_num << " times" << std::endl;
-      break;
-    }
-    default:
-      break;
+      case SIGINT:
+        std::cout << "got signal SIGINT " << int_num << " times" << std::endl;
+        break;
+      case SIGTERM: {
+        std::cout << "got signal SIGTERM " << term_num << " times" << std::endl;
+        break;
+      }
+      default:
+        break;
     }  // switch
   }    // check err
 }

@@ -1,10 +1,10 @@
 #include <fmt/core.h>
 #include <fmt/ostream.h>
+
 #include <asio/io_context.hpp>
 #include <asio/ip/tcp.hpp>
 #include <asio/ip/udp.hpp>
 #include <asio/write.hpp>
-
 #include <functional>
 #include <iostream>
 #include <string>
@@ -21,17 +21,15 @@ class TcpConnection : public std::enable_shared_from_this<TcpConnection> {
  public:
   using Pointer = std::shared_ptr<TcpConnection>;
 
-  static Pointer Create(asio::io_context& io_ctx) {
-    return Pointer{new TcpConnection(io_ctx)};
-  }
+  static Pointer Create(asio::io_context& io_ctx) { return Pointer{new TcpConnection(io_ctx)}; }
 
   ~TcpConnection() {}
 
   void Start() {
     message_ = make_daytime_string();
-    asio::async_write(socket_, asio::buffer(message_),
-                      std::bind(&TcpConnection::write, shared_from_this(),
-                                std::placeholders::_1, std::placeholders::_2));
+    asio::async_write(
+        socket_, asio::buffer(message_),
+        std::bind(&TcpConnection::write, shared_from_this(), std::placeholders::_1, std::placeholders::_2));
   }
 
   tcp::socket& GetMutableSocket() { return socket_; }
@@ -55,16 +53,15 @@ class TcpConnection : public std::enable_shared_from_this<TcpConnection> {
 class TcpServer {
  public:
   TcpServer(asio::io_context& io_ctx, unsigned short port)
-      :io_context_(io_ctx), acceptor_{io_context_, tcp::endpoint{tcp::v4(), port}} {
+      : io_context_(io_ctx), acceptor_{io_context_, tcp::endpoint{tcp::v4(), port}} {
     start_accept();
   }
 
  private:
   void start_accept() {
     auto connection{TcpConnection::Create(io_context_)};
-    acceptor_.async_accept(
-        connection->GetMutableSocket(),
-        std::bind(&TcpServer::accept, this, connection, std::placeholders::_1));
+    acceptor_.async_accept(connection->GetMutableSocket(),
+                           std::bind(&TcpServer::accept, this, connection, std::placeholders::_1));
   }
 
   void accept(TcpConnection::Pointer connection, const asio::error_code& ec) {
@@ -77,34 +74,29 @@ class TcpServer {
   }
 
  private:
- asio::io_context& io_context_;
+  asio::io_context& io_context_;
   asio::ip::tcp::acceptor acceptor_;
 };
 
 class UdpServer {
  public:
-  UdpServer(asio::io_context& io_ctx, unsigned short port)
-      : socket_{io_ctx, udp::endpoint{udp::v4(), port}} {
+  UdpServer(asio::io_context& io_ctx, unsigned short port) : socket_{io_ctx, udp::endpoint{udp::v4(), port}} {
     start_receive();
   }
 
  private:
   void start_receive() {
-    socket_.async_receive_from(
-        asio::buffer(recv_buf_), remote_endpoint_,
-        std::bind(&UdpServer::receive, this, std::placeholders::_1));
+    socket_.async_receive_from(asio::buffer(recv_buf_), remote_endpoint_,
+                               std::bind(&UdpServer::receive, this, std::placeholders::_1));
   }
 
   void receive(const asio::error_code& ec) {
     if (!ec) {
-      fmt::print("receve message[{}] from {}:{}\n", recv_buf_.data(),
-                 remote_endpoint_.address().to_string(),
+      fmt::print("receve message[{}] from {}:{}\n", recv_buf_.data(), remote_endpoint_.address().to_string(),
                  remote_endpoint_.port());
       message_ = make_daytime_string();
-      socket_.async_send_to(
-          asio::buffer(message_), remote_endpoint_,
-          std::bind(&UdpServer::write, this, std::placeholders::_1,
-                    std::placeholders::_2));
+      socket_.async_send_to(asio::buffer(message_), remote_endpoint_,
+                            std::bind(&UdpServer::write, this, std::placeholders::_1, std::placeholders::_2));
     } else {
       fmt::print(std::cerr, "receive got error:{}\n", ec);
     }
@@ -133,10 +125,8 @@ int main(int argc, char** argv) {
 
   try {
     asio::io_context io_ctx;
-    TcpServer tcp_server(io_ctx,
-                         static_cast<unsigned short>(std::stoi(argv[1])));
-    UdpServer udp_server(io_ctx,
-                         static_cast<unsigned short>(std::stoi(argv[2])));
+    TcpServer tcp_server(io_ctx, static_cast<unsigned short>(std::stoi(argv[1])));
+    UdpServer udp_server(io_ctx, static_cast<unsigned short>(std::stoi(argv[2])));
 
     io_ctx.run();
   } catch (const std::exception& e) {

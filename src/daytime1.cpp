@@ -1,10 +1,10 @@
 #include <fmt/core.h>
 #include <fmt/ostream.h>
+
+#include <array>
 #include <asio/connect.hpp>
 #include <asio/io_context.hpp>
 #include <asio/ip/tcp.hpp>
-
-#include <array>
 #include <iostream>
 #include <thread>
 

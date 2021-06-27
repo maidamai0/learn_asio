@@ -1,9 +1,8 @@
-#include <asio/io_context.hpp>
-#include <asio/system_timer.hpp>
-
 #include <fmt/core.h>
 #include <fmt/format.h>
 
+#include <asio/io_context.hpp>
+#include <asio/system_timer.hpp>
 #include <chrono>
 
 void handler(asio::error_code) { fmt::print("Hello world\n"); }

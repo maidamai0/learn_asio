@@ -1,9 +1,9 @@
 #include <fmt/core.h>
+
 #include <asio/bind_executor.hpp>
 #include <asio/io_context.hpp>
 #include <asio/strand.hpp>
 #include <asio/system_timer.hpp>
-
 #include <chrono>
 #include <functional>
 #include <iostream>
@@ -18,11 +18,9 @@ class Printer {
         timer2_{io_ctx_, std::chrono::seconds(1)},
         need_sync_{need_sync} {
     if (need_sync_) {
-      timer1_.async_wait(
-          asio::bind_executor(strand_, std::bind(&Printer::print1, this)));
+      timer1_.async_wait(asio::bind_executor(strand_, std::bind(&Printer::print1, this)));
 
-      timer2_.async_wait(
-          asio::bind_executor(strand_, std::bind(&Printer::print2, this)));
+      timer2_.async_wait(asio::bind_executor(strand_, std::bind(&Printer::print2, this)));
     } else {
       timer1_.async_wait(std::bind(&Printer::print1, this));
 
@@ -38,8 +36,7 @@ class Printer {
       std::cout << __PRETTY_FUNCTION__ << ":" << cnt_++ << "\n";
       timer1_.expires_at(timer1_.expiry() + std::chrono::seconds(1));
       if (need_sync_) {
-        timer1_.async_wait(
-            asio::bind_executor(strand_, std::bind(&Printer::print1, this)));
+        timer1_.async_wait(asio::bind_executor(strand_, std::bind(&Printer::print1, this)));
       } else {
         timer1_.async_wait(std::bind(&Printer::print1, this));
       }
@@ -52,8 +49,7 @@ class Printer {
       timer2_.expires_at(timer2_.expiry() + std::chrono::seconds(1));
 
       if (need_sync_) {
-        timer2_.async_wait(
-            asio::bind_executor(strand_, std::bind(&Printer::print2, this)));
+        timer2_.async_wait(asio::bind_executor(strand_, std::bind(&Printer::print2, this)));
       } else {
         timer2_.async_wait(std::bind(&Printer::print2, this));
       }

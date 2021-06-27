@@ -2,7 +2,6 @@
 
 #include <asio/io_context.hpp>
 #include <asio/system_timer.hpp>
-
 #include <chrono>
 #include <iostream>
 #include <thread>
@@ -15,8 +14,7 @@ void timer1_hander(asio::error_code ec) {
   (void)ec;
 
   static size_t cnt = 0;
-  std::cout << "Thread is is " << std::this_thread::get_id() << " "
-            << __FUNCTION__ << " cnt is " << cnt++ << std::endl;
+  std::cout << "Thread is is " << std::this_thread::get_id() << " " << __FUNCTION__ << " cnt is " << cnt++ << std::endl;
 
   if (cnt < 10) {
     timer1.expires_after(std::chrono::seconds(10));
@@ -28,8 +26,7 @@ void timer1_hander(asio::error_code ec) {
 void timer2_handler(asio::error_code ec) {
   (void)ec;
   static size_t cnt = 0;
-  std::cout << "Thread is is " << std::this_thread::get_id() << " "
-            << __FUNCTION__ << " cnt is " << cnt++ << std::endl;
+  std::cout << "Thread is is " << std::this_thread::get_id() << " " << __FUNCTION__ << " cnt is " << cnt++ << std::endl;
 
   if (cnt < 10) {
     timer2.expires_after(std::chrono::seconds(100));
@@ -42,8 +39,7 @@ void timer2_handler(asio::error_code ec) {
 int main(int argc, char** argv) {
   (void)argc;
   (void)argv;
-  std::cout << "This thread id is " << std::this_thread::get_id() << " "
-            << __FUNCTION__ << std::endl;
+  std::cout << "This thread id is " << std::this_thread::get_id() << " " << __FUNCTION__ << std::endl;
 
   timer1.expires_after(std::chrono::seconds(2));
   timer1.async_wait(timer1_hander);

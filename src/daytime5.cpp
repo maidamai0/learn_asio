@@ -1,8 +1,8 @@
 #include <fmt/core.h>
 #include <fmt/ostream.h>
+
 #include <asio/io_context.hpp>
 #include <asio/ip/udp.hpp>
-
 #include <ctime>
 #include <iostream>
 #include <string>

@@ -1,9 +1,9 @@
 #include <fmt/core.h>
 #include <fmt/ostream.h>
+
 #include <asio/io_context.hpp>
 #include <asio/ip/tcp.hpp>
 #include <asio/write.hpp>
-
 #include <ctime>
 #include <iostream>
 #include <string>
@@ -21,8 +21,7 @@ int main(int argc, char** argv) {
       return 1;
     }
     asio::io_context io_ctx;
-    asio::ip::tcp::acceptor acceptor(
-        io_ctx, tcp::endpoint(tcp::v4(), std::stoi(argv[1])));
+    asio::ip::tcp::acceptor acceptor(io_ctx, tcp::endpoint(tcp::v4(), std::stoi(argv[1])));
 
     while (true) {
       tcp::socket socket(io_ctx);
