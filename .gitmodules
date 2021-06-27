@@ -1,0 +1,12 @@
+[submodule "deps/asio"]
+	path = deps/asio
+	url = https://github.com/chriskohlhoff/asio
+	branch = master
+[submodule "deps/http_parser"]
+	path = deps/http_parser
+	url = https://github.com/nodejs/http-parser
+	branch = main
+[submodule "deps/fmtlib"]
+	path = deps/fmtlib
+	url = https://github.com/fmtlib/fmt
+	branch = master
