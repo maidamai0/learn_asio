@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
 project(learn_asio)
 
@@ -11,26 +11,26 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
     link_libraries(pthread)
-endif()
 
-# warning flags
-# all warning message specified here will not be allowed in code
-# TODO Add -Wconversion
-set(WARNING "-Wall -Werror -Wpedantic -Wextra")
+    # warning flags
+    # all warning message specified here will not be allowed in code
+    # TODO Add -Wconversion
+    set(WARNING "-Wall -Werror -Wpedantic -Wextra")
 
-# ignore some warnings
-set(WARNING "${WARNING} -Wno-nonnull")
+    # ignore some warnings
+    set(WARNING "${WARNING} -Wno-nonnull")
 
-if(CMAKE_COMPILER_IS_GNUCC AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 7.0)
-    set(WARNING "${WARNING} -Wshadow=local")
-    message("g++ version greater than 7.0 use -Wshadow=local")
+    if(CMAKE_COMPILER_IS_GNUCC AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 7.0)
+        set(WARNING "${WARNING} -Wshadow=local")
+        message("g++ version greater than 7.0 use -Wshadow=local")
+    endif()
+
+    # other common compile falgs
+    set(OTHER_COMPILE_FLAGS "-fexceptions")
 endif()
 
 # c++ version
 set(CMAKE_CXX_STANDARD 17)
-
-# other common compile falgs
-set(OTHER_COMPILE_FLAGS "-fexceptions")
 
 # default c++ compile flags
 set(COMMON_COMPILE_FLAGS "${WARNING} ${OTHER_COMPILE_FLAGS}")
@@ -40,9 +40,6 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 ${COMMON_COMPILE_FLAGS}")
 
 # release compile flags
 set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O2 ${COMMON_COMPILE_FLAGS}")
-
-# default c++ compile flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
 
 include_directories(deps/asio/asio/include)
 
