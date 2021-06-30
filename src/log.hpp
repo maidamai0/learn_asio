@@ -11,19 +11,19 @@
  *
  */
 
-#define LOGD SPDLOG_DEBUG
-#define LOGI SPDLOG_INFO
-#define LOGW SPDLOG_WARN
-#define LOGE SPDLOG_ERROR
-
-#ifndef NDEBUG
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
-#endif
+#include <string_view>
 
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/sinks/stdout_sinks.h"
 #include "spdlog/spdlog.h"
+
+#define LOGD SPDLOG_DEBUG
+#define LOGI SPDLOG_INFO
+#define LOGW SPDLOG_WARN
+#define LOGE SPDLOG_ERROR
+
+#define TRACE log_details::ScopeTrace trace(__FUNCTION__)
 
 namespace log_details {
 
@@ -40,14 +40,22 @@ class Log {
     spdlog::set_level(spdlog::level::debug);
     // spdlog::enable_backtrace(10);
     spdlog::flush_on(spdlog::level::debug);
-    spdlog::set_pattern("[%Y-%m-%d %T.%e] [%L] [%s:%#] [%!] %v");
+    spdlog::set_pattern("%Y-%m-%d %T.%e %L %v   [%s:%# %!]");
 
-    SPDLOG_INFO(fmt::format("{} started", APP_NAME));
+    SPDLOG_INFO(fmt::format("Application {} started", APP_NAME));
   }
 
-  ~Log() { SPDLOG_INFO(fmt::format("{} terminated", APP_NAME)); }
+  ~Log() { SPDLOG_INFO(fmt::format("Application {} terminated", APP_NAME)); }
 };
 
 const Log log;
+
+class ScopeTrace {
+ public:
+  ScopeTrace(std::string_view scope_name) : name_(scope_name) { LOGI(">>> {}", name_); }
+  ~ScopeTrace() { LOGI("<<< {}", name_); }
+
+  std::string_view name_;
+};
 
 }  // namespace log_details

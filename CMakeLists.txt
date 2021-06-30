@@ -48,6 +48,7 @@ include_directories(deps/asio/asio/include)
 add_library(http_parser deps/http_parser/http_parser.c)
 include_directories(deps/http_parser)
 
+add_compile_definitions(SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 add_subdirectory(deps/spdlog)
 include_directories(deps/spdlog/include/)
 link_libraries(spdlog)

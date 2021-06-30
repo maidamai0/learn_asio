@@ -1,15 +1,20 @@
 #include <asio/io_context.hpp>
 #include <asio/steady_timer.hpp>
 #include <chrono>
-#include <iostream>
+#include <thread>
+
+#include "log.hpp"
 
 int main() {
-  asio::io_context io_ctx;
-  asio::steady_timer timer(io_ctx, std::chrono::seconds(5));
+  using namespace std::chrono_literals;
+  asio::io_context io;
+  asio::steady_timer timer(io, 2s);
+  LOGI("timer created");
+  std::this_thread::sleep_for(1s);
 
-  std::cout << "timer begins wait...\n";
+  LOGI("timer.wait");
   timer.wait();
-  std::cout << "Hello world" << std::endl;
+  LOGI("timer expired");
 
   return 0;
 }

@@ -1,22 +1,31 @@
 #include <asio/io_context.hpp>
 #include <asio/system_timer.hpp>
 #include <chrono>
+#include <functional>
+#include <string_view>
 
 #include "log.hpp"
 
-void handler(asio::error_code) { fmt::print("Hello world\n"); }
+void handler(asio::error_code, std::string_view name) {
+  TRACE;
+  LOGI("handle {}", name);
+}
 
 int main() {
-  asio::io_context io_ctx;
-  asio::system_timer timer(io_ctx);
+  using namespace std::chrono_literals;
+  using namespace std::placeholders;
+  asio::io_context io;
+  LOGI("io context created");
 
-  timer.expires_after(std::chrono::seconds(2));
-  timer.async_wait(&handler);
+  asio::system_timer timer(io);
+  timer.expires_after(1s);
+  timer.async_wait(std::bind(handler, _1, "async timer"));
+  LOGI("async timer ready");
 
-  /// @warning   asio::system_timer (io_ctx,
-  /// std::chrono::seconds(5)).async_wait(&handler); will not work
-  asio::system_timer timer1(io_ctx, std::chrono::seconds(5));
-  timer1.async_wait(&handler);
+  LOGI("sync timer ready");
+  asio::system_timer timer1(io, 2s);
+  timer1.async_wait(std::bind(handler, _1, "sync timer"));
 
-  io_ctx.run();
+  LOGI("io context begin to run");
+  io.run();
 }
