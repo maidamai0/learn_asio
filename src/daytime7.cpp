@@ -1,6 +1,3 @@
-#include <fmt/core.h>
-#include <fmt/ostream.h>
-
 #include <asio/io_context.hpp>
 #include <asio/ip/tcp.hpp>
 #include <asio/ip/udp.hpp>
@@ -8,6 +5,8 @@
 #include <functional>
 #include <iostream>
 #include <string>
+
+#include "log.hpp"
 
 using asio::ip::tcp;
 using asio::ip::udp;
@@ -38,11 +37,11 @@ class TcpConnection : public std::enable_shared_from_this<TcpConnection> {
   TcpConnection(asio::io_context& io_ctx) : socket_{io_ctx} {}
   void write(const asio::error_code& error, size_t len) {
     if (error) {
-      fmt::print(std::cerr, "write error:{}\n", error);
+      LOGE("write error:{}", error.message());
       throw asio::system_error(error);
     }
 
-    fmt::print("write len:{}\n", len);
+    LOGI("write len:{}", len);
   }
 
  private:
@@ -92,21 +91,21 @@ class UdpServer {
 
   void receive(const asio::error_code& ec) {
     if (!ec) {
-      fmt::print("receve message[{}] from {}:{}\n", recv_buf_.data(), remote_endpoint_.address().to_string(),
-                 remote_endpoint_.port());
+      LOGI("receve message[{}] from {}:{}", recv_buf_.data(), remote_endpoint_.address().to_string(),
+           remote_endpoint_.port());
       message_ = make_daytime_string();
       socket_.async_send_to(asio::buffer(message_), remote_endpoint_,
                             std::bind(&UdpServer::write, this, std::placeholders::_1, std::placeholders::_2));
     } else {
-      fmt::print(std::cerr, "receive got error:{}\n", ec);
+      LOGE("receive got error:{}", ec.message());
     }
   }
 
   void write(const asio::error_code& ec, size_t len) {
     if (!ec) {
-      fmt::print("write len : {}\n", len);
+      LOGI("write len : {}", len);
     } else {
-      fmt::print(std::cerr, "write got error:{}\n", ec);
+      LOGE("write got error:{}", ec.message());
     }
   }
 
@@ -119,7 +118,7 @@ class UdpServer {
 
 int main(int argc, char** argv) {
   if (argc != 3) {
-    fmt::print(std::cerr, "Usage: daytime7 <tcp port> <udp port>\n");
+    LOGE("Usage: daytime7 <tcp port> <udp port>");
     return 1;
   }
 

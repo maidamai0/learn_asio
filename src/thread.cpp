@@ -1,10 +1,10 @@
-#include <fmt/core.h>
-
 #include <asio/io_context.hpp>
 #include <asio/system_timer.hpp>
 #include <chrono>
 #include <iostream>
 #include <thread>
+
+#include "log.hpp"
 
 asio::io_context io_context;
 asio::system_timer timer1(io_context);

@@ -1,6 +1,3 @@
-#include <fmt/core.h>
-#include <fmt/ostream.h>
-
 #include <asio/io_context.hpp>
 #include <asio/ip/tcp.hpp>
 #include <asio/placeholders.hpp>
@@ -9,6 +6,8 @@
 #include <iostream>
 #include <memory>
 #include <string>
+
+#include "log.hpp"
 
 std::string make_daytime_string() {
   time_t now = time(nullptr);
@@ -27,7 +26,7 @@ class TcpConnection : public std::enable_shared_from_this<TcpConnection> {
   static size_t getNumber() { return cnt_; }
 
   void Start() {
-    fmt::print("{} port {} opened\n", __PRETTY_FUNCTION__, socket_.remote_endpoint().port());
+    LOGI("{} port {} opened", __PRETTY_FUNCTION__, socket_.remote_endpoint().port());
     message_ = make_daytime_string();
     message_ += "client address is " + socket_.remote_endpoint().address().to_string() + ":" +
                 std::to_string(socket_.remote_endpoint().port()) + "\n\n";
@@ -41,18 +40,18 @@ class TcpConnection : public std::enable_shared_from_this<TcpConnection> {
 
   /// used by std::shared_ptr
   ~TcpConnection() {
-    fmt::print("{} port {} closed\n", __PRETTY_FUNCTION__, socket_.remote_endpoint().port());
-    fmt::print("{} left\n\n", --cnt_);
+    LOGI("{} port {} closed", __PRETTY_FUNCTION__, socket_.remote_endpoint().port());
+    LOGI("{} left\n", --cnt_);
   }
 
  private:
-  TcpConnection(asio::io_context& io_ctx) : socket_{io_ctx} { fmt::print("{}st connection opened\n", ++cnt_); }
+  TcpConnection(asio::io_context& io_ctx) : socket_{io_ctx} { LOGI("{}st connection opened\n", ++cnt_); }
 
   void write(const asio::error_code ec, size_t len) {
     if (ec) {
       throw asio::system_error(ec);
     } else {
-      fmt::print("write len:{}\n", len);
+      LOGI("write len:{}", len);
     }
   }
 
@@ -68,13 +67,13 @@ class TcpServer {
  public:
   TcpServer(asio::io_context& io_ctx, const int port)
       : io_context_(io_ctx), acceptor_{io_context_, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port)} {
-    fmt::print("{} listen on {}\n", __PRETTY_FUNCTION__, port);
+    LOGI("{} listen on {}", __PRETTY_FUNCTION__, port);
     start_accept();
   }
 
   ~TcpServer() {
-    fmt::print("{} server {}:{} closed\n", __PRETTY_FUNCTION__, acceptor_.local_endpoint().address(),
-               acceptor_.local_endpoint().port());
+    LOGI("{} server {}:{} closed", __PRETTY_FUNCTION__, acceptor_.local_endpoint().address().to_string(),
+         acceptor_.local_endpoint().port());
   }
 
  private:
@@ -100,7 +99,7 @@ class TcpServer {
 
 int main(int argc, char** argv) {
   if (argc != 2) {
-    fmt::print(std::cerr, "Usage daytime3 <port>\n");
+    LOGE("Usage daytime3 <port>\n");
     return 1;
   }
 
@@ -110,6 +109,6 @@ int main(int argc, char** argv) {
     io_ctx.run();
 
   } catch (const std::exception& e) {
-    fmt::print(std::cerr, "{}:{} {}\n", __FILE__, __LINE__, e.what());
+    LOGE("{}:{} {}\n", __FILE__, __LINE__, e.what());
   }
 }

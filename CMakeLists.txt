@@ -41,12 +41,15 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 ${COMMON_COMPILE_FLAGS}")
 # release compile flags
 set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O2 ${COMMON_COMPILE_FLAGS}")
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 include_directories(deps/asio/asio/include)
 
 add_library(http_parser deps/http_parser/http_parser.c)
 include_directories(deps/http_parser)
 
-add_subdirectory(deps/fmtlib)
-link_libraries(fmt)
+add_subdirectory(deps/spdlog)
+include_directories(deps/spdlog/include/)
+link_libraries(spdlog)
 
 add_subdirectory(src)

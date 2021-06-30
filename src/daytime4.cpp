@@ -1,16 +1,15 @@
-#include <fmt/core.h>
-#include <fmt/ostream.h>
-
 #include <array>
 #include <asio/io_context.hpp>
 #include <asio/ip/udp.hpp>
 #include <iostream>
 
+#include "log.hpp"
+
 using asio::ip::udp;
 
 int main(int argc, char** argv) {
   if (argc != 3) {
-    fmt::print(std::cerr, "Usage daytime4 <host> <port>\n");
+    LOGE("Usage daytime4 <host> <port>");
     return 1;
   }
 
@@ -24,12 +23,12 @@ int main(int argc, char** argv) {
     std::array<char, 1> send_buf{0};
     socket.send_to(asio::buffer(send_buf), remote_endpoint);
 
-    fmt::print("remote endpoint is {}:{}\n", remote_endpoint.address(), remote_endpoint.port());
+    LOGI("remote endpoint is {}:{}", remote_endpoint.address().to_string(), remote_endpoint.port());
 
     std::array<char, 128> recv_buf{0};
     udp::endpoint sender_endpoint;
     size_t len = socket.receive_from(asio::buffer(recv_buf), sender_endpoint);
-    fmt::print("local endpoint is {}:{}\n", socket.local_endpoint().address(), socket.local_endpoint().port());
+    LOGI("local endpoint is {}:{}", socket.local_endpoint().address().to_string(), socket.local_endpoint().port());
 
     assert(remote_endpoint.address() == sender_endpoint.address());
     assert(remote_endpoint.port() == sender_endpoint.port());

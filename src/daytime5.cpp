@@ -1,11 +1,10 @@
-#include <fmt/core.h>
-#include <fmt/ostream.h>
-
 #include <asio/io_context.hpp>
 #include <asio/ip/udp.hpp>
 #include <ctime>
 #include <iostream>
 #include <string>
+
+#include "log.hpp"
 
 using asio::ip::udp;
 
@@ -16,7 +15,7 @@ std::string make_daytime_string() {
 
 int main(int argc, char** argv) {
   if (argc != 2) {
-    fmt::print(std::cerr, "Usage daytime5 <port>\n");
+    LOGE("Usage daytime5 <port>\n");
     return 1;
   }
 
@@ -37,6 +36,6 @@ int main(int argc, char** argv) {
     }
 
   } catch (const std::exception& e) {
-    std::cerr << e.what() << '\n';
+    LOGE("Failed: {}", e.what());
   }
 }

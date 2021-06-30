@@ -10,3 +10,7 @@
 	path = deps/fmtlib
 	url = https://github.com/fmtlib/fmt
 	branch = master
+[submodule "deps/spdlog"]
+	path = deps/spdlog
+	url = https://github.com/gabime/spdlog.git
+	branch = v2.x

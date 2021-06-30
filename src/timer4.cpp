@@ -1,10 +1,10 @@
-#include <fmt/core.h>
-
 #include <asio/io_context.hpp>
 #include <asio/system_timer.hpp>
 #include <chrono>
 #include <functional>
 #include <iostream>
+
+#include "log.hpp"
 
 class printer {
  public:
@@ -12,11 +12,11 @@ class printer {
     timer_.async_wait(std::bind(&printer::print, this, std::placeholders::_1));
   }
 
-  ~printer() { fmt::print("Fire!\n"); }
+  ~printer() { LOGI("Fire!\n"); }
 
   void print(asio::error_code) {
     if (count_ > 0) {
-      fmt::print("{}\n", count_--);
+      LOGI("{}", count_--);
       timer_.expires_at(timer_.expiry() + std::chrono::seconds(1));
       timer_.async_wait(std::bind(&printer::print, this, std::placeholders::_1));
     }

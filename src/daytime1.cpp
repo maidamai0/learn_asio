@@ -1,5 +1,3 @@
-#include <fmt/core.h>
-#include <fmt/ostream.h>
 
 #include <array>
 #include <asio/connect.hpp>
@@ -8,9 +6,11 @@
 #include <iostream>
 #include <thread>
 
+#include "log.hpp"
+
 int main(int argc, char** argv) {
   if (argc != 3) {
-    fmt::print(std::cerr, "Usage:daytime1 <host> <port>\n");
+    LOGE("Usage:daytime1 <host> <port>\n");
     return 1;
   }
 
@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
     asio::ip::tcp::socket socket(io_ctx);
     asio::connect(socket, endpoints);
 
-    fmt::print("local port is {}\n", socket.local_endpoint().port());
+    LOGI("local port is {}\n", socket.local_endpoint().port());
 
     while (true) {
       std::array<char, 128> buf{0};
@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
       std::cout.write(buf.data(), len);
     }
   } catch (const std::exception& e) {
-    fmt::print(std::cerr, "{}\n", e.what());
+    LOGE("{}\n", e.what());
   }
 
   return 0;

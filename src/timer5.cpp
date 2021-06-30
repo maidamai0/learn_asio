@@ -1,5 +1,3 @@
-#include <fmt/core.h>
-
 #include <asio/bind_executor.hpp>
 #include <asio/io_context.hpp>
 #include <asio/strand.hpp>
@@ -8,6 +6,8 @@
 #include <functional>
 #include <iostream>
 #include <thread>
+
+#include "log.hpp"
 
 class Printer {
  public:
@@ -28,11 +28,10 @@ class Printer {
     }
   }
 
-  ~Printer() { fmt::print("Final count is {}\n", cnt_); }
+  ~Printer() { LOGI("Final count is {}", cnt_); }
 
   void print1() {
     if (cnt_ < 10) {
-      // fmt::print("{}:{}\n", __PRETTY_FUNCTION__, cnt_++);
       std::cout << __PRETTY_FUNCTION__ << ":" << cnt_++ << "\n";
       timer1_.expires_at(timer1_.expiry() + std::chrono::seconds(1));
       if (need_sync_) {
@@ -44,7 +43,6 @@ class Printer {
   };
   void print2() {
     if (cnt_ < 10) {
-      // fmt::print("{}:{}\n", __PRETTY_FUNCTION__, cnt_++);
       std::cout << __PRETTY_FUNCTION__ << ":" << cnt_++ << "\n";
       timer2_.expires_at(timer2_.expiry() + std::chrono::seconds(1));
 
@@ -66,7 +64,7 @@ class Printer {
 };
 
 int main() {
-  fmt::print("Synchronize version:\n");
+  LOGI("Synchronize version:");
   asio::io_context io_ctx;
   {
     Printer printer(io_ctx);
@@ -76,7 +74,7 @@ int main() {
     }
   }
 
-  fmt::print("No synchronize version:\n");
+  LOGI("No synchronize version:");
   asio::io_context io_ctx1;
   {
     Printer printer1(io_ctx1, false);

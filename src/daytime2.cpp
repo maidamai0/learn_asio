@@ -1,5 +1,3 @@
-#include <fmt/core.h>
-#include <fmt/ostream.h>
 
 #include <asio/io_context.hpp>
 #include <asio/ip/tcp.hpp>
@@ -7,6 +5,8 @@
 #include <ctime>
 #include <iostream>
 #include <string>
+
+#include "log.hpp"
 
 std::string make_daytime_string() {
   time_t now = time(nullptr);
@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
   using namespace asio::ip;
   try {
     if (argc != 2) {
-      fmt::print(std::cerr, "Usage:daytime2 <port>\n");
+      LOGE("Usage:daytime2 <port>");
       return 1;
     }
     asio::io_context io_ctx;
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
       asio::write(socket, asio::buffer(message), ignored_error);
     }
   } catch (const std::exception& e) {
-    fmt::print(std::cerr, "{}\n", e.what());
+    LOGE("{}", e.what());
   }
 
   return 0;

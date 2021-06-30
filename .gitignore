@@ -8,3 +8,4 @@ build/*
 
 # soft link of compile_commands.json used for clangd
 compile_commands.json
+logs

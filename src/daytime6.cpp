@@ -1,6 +1,3 @@
-#include <fmt/core.h>
-#include <fmt/ostream.h>
-
 #include <array>
 #include <asio/io_context.hpp>
 #include <asio/ip/udp.hpp>
@@ -9,6 +6,8 @@
 #include <iostream>
 #include <memory>
 #include <string>
+
+#include "log.hpp"
 
 using asio::ip::udp;
 
@@ -25,23 +24,23 @@ class UdpServer {
 
  private:
   void start_receive() {
-    fmt::print("Listen on {}:{}\n", socket_.local_endpoint().address().to_string(), socket_.local_endpoint().port());
+    LOGI("Listen on {}:{}", socket_.local_endpoint().address().to_string(), socket_.local_endpoint().port());
     socket_.async_receive_from(asio::buffer(recv_buffer_), remote_endpoint_,
                                std::bind(&UdpServer::receive, this, std::placeholders::_1, std::placeholders::_2));
   }
 
   void receive(const asio::error_code& ec, size_t len) {
     if (len != recv_buffer_.size()) {
-      fmt::print("Warning: receive len[{}] is not equal to buffer size[{}]\n", len, recv_buffer_.size());
+      LOGW("receive len[{}] is not equal to buffer size[{}]", len, recv_buffer_.size());
     }
 
-    fmt::print("remote is {}:{}\n", remote_endpoint_.address().to_string(), remote_endpoint_.port());
+    LOGI("remote is {}:{}", remote_endpoint_.address().to_string(), remote_endpoint_.port());
 
     std::shared_ptr<std::string> message;
     if (!ec) {
       message = std::make_shared<std::string>(make_daytime_string());
     } else {
-      fmt::print(std::cerr, "receive got error:{}\n", ec);
+      LOGE("receive got error:{}", ec.message());
       message = std::make_shared<std::string>(ec.message());
     }
 
@@ -52,7 +51,7 @@ class UdpServer {
 
   void send(std::shared_ptr<std::string> message, const asio::error_code& ec, size_t len) {
     if (ec) {
-      fmt::print(std::cerr, "Send message {} error:{}, len:{}\n", *message, ec, len);
+      LOGE("Send message {} error:{}, len:{}", *message, ec.message(), len);
     }
   }
 
@@ -67,7 +66,7 @@ void handler(asio::io_context& io_ctx, const asio::error_code&, int signal_numbe
     case SIGSEGV:
     case SIGINT:
     case SIGTERM: {
-      fmt::print("got signal {}, exit...\n", signal_number);
+      LOGE("got signal {}, exit...", signal_number);
       io_ctx.stop();
       break;
     }
@@ -78,7 +77,7 @@ void handler(asio::io_context& io_ctx, const asio::error_code&, int signal_numbe
 
 int main(int argc, char** argv) {
   if (argc != 2) {
-    fmt::print(std::cerr, "Usage: daytime6 <port>\n");
+    LOGE("Usage: daytime6 <port>");
     return 1;
   }
 
