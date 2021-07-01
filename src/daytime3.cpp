@@ -109,6 +109,6 @@ int main(int argc, char** argv) {
     io_ctx.run();
 
   } catch (const std::exception& e) {
-    LOGE("{}:{} {}\n", __FILE__, __LINE__, e.what());
+    LOGE("{}:{} {}", __FILE__, __LINE__, e.what());
   }
 }

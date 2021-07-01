@@ -42,7 +42,7 @@ void handler(asio::error_code ec, asio::system_timer& timer, unsigned& count) {
   (void)ec;
 
   if (count < 5) {
-    LOGI("{}\n", count++);
+    LOGI("{}", count++);
     timer.expires_at(timer.expiry() + std::chrono::seconds(1));
     timer.async_wait(std::bind(handler, std::placeholders::_1, std::ref(timer), std::ref(count)));
   }
@@ -57,7 +57,7 @@ int main() {
   //   timer.async_wait(wrapper(timer, cnt));
   io_ctx.run();
 
-  LOGI("Final count is {}\n", cnt);
+  LOGI("Final count is {}", cnt);
 
   return 0;
 }

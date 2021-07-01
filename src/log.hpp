@@ -40,7 +40,7 @@ class Log {
     spdlog::set_level(spdlog::level::debug);
     // spdlog::enable_backtrace(10);
     spdlog::flush_on(spdlog::level::debug);
-    spdlog::set_pattern("%Y-%m-%d %T.%e %L %v   [%s:%# %!]");
+    spdlog::set_pattern("%Y-%m-%d %T.%e %L %v @%s:%#");
 
     SPDLOG_INFO(fmt::format("Application {} started", APP_NAME));
   }

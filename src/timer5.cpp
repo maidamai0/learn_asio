@@ -19,11 +19,9 @@ class Printer {
         need_sync_{need_sync} {
     if (need_sync_) {
       timer1_.async_wait(asio::bind_executor(strand_, std::bind(&Printer::print1, this)));
-
       timer2_.async_wait(asio::bind_executor(strand_, std::bind(&Printer::print2, this)));
     } else {
       timer1_.async_wait(std::bind(&Printer::print1, this));
-
       timer2_.async_wait(std::bind(&Printer::print2, this));
     }
   }
@@ -41,6 +39,7 @@ class Printer {
       }
     }
   };
+
   void print2() {
     if (cnt_ < 10) {
       std::cout << __PRETTY_FUNCTION__ << ":" << cnt_++ << "\n";
