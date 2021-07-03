@@ -13,19 +13,18 @@ std::string make_daytime_string() {
   return ctime(&now);
 }
 
-int main(int argc, char** argv) {
+int main() {
   using namespace asio::ip;
   try {
-    if (argc != 2) {
-      LOGE("Usage:daytime2 <port>");
-      return 1;
-    }
+    int port = 13;
     asio::io_context io_ctx;
-    asio::ip::tcp::acceptor acceptor(io_ctx, tcp::endpoint(tcp::v4(), std::stoi(argv[1])));
+    asio::ip::tcp::acceptor acceptor(io_ctx, tcp::endpoint(tcp::v4(), 13));
+    LOGI("daytime server is running on {}", port);
 
     while (true) {
       tcp::socket socket(io_ctx);
       acceptor.accept(socket);
+      LOGI("accept remote {}:{}", socket.remote_endpoint().address().to_string(), socket.remote_endpoint().port());
 
       std::string message = make_daytime_string();
       asio::error_code ignored_error;

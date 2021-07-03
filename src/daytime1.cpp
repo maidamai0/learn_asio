@@ -3,27 +3,42 @@
 #include <asio/connect.hpp>
 #include <asio/io_context.hpp>
 #include <asio/ip/tcp.hpp>
+#include <cstdlib>
 #include <iostream>
 #include <thread>
 
+#include "cxxopts.hpp"
 #include "log.hpp"
 
 int main(int argc, char** argv) {
-  if (argc != 3) {
-    LOGE("Usage:daytime1 <host> <port>\n");
-    return 1;
+  std::string host;
+  try {
+    cxxopts::Options options("daytime1", "get date time");
+    // clang-format off
+    options.add_options()
+    ("h,host", "host name or ip address", cxxopts::value<std::string>(host)->implicit_value("localhost"));
+    // clang-format on
+    const auto args = options.parse(argc, argv);
+  } catch (cxxopts::OptionException& e) {
+    LOGE("{}", e.what());
+    return EXIT_FAILURE;
   }
 
   asio::io_context io_ctx;
   asio::ip::tcp::resolver resolver(io_ctx);
 
-  auto endpoints = resolver.resolve(argv[1], argv[2]);
+  auto results = resolver.resolve(host, "daytime");
+
+  LOGI("endpoints list:");
+  for (const auto& result : results) {
+    LOGI("{} => {}:{}", result.host_name(), result.endpoint().address().to_string(), result.endpoint().port());
+  }
 
   try {
     asio::ip::tcp::socket socket(io_ctx);
-    asio::connect(socket, endpoints);
+    asio::connect(socket, results);
 
-    LOGI("local port is {}\n", socket.local_endpoint().port());
+    LOGI("local port is {}", socket.local_endpoint().port());
 
     while (true) {
       std::array<char, 128> buf{0};
@@ -40,7 +55,7 @@ int main(int argc, char** argv) {
       std::cout.write(buf.data(), len);
     }
   } catch (const std::exception& e) {
-    LOGE("{}\n", e.what());
+    LOGE("{}", e.what());
   }
 
   return 0;
