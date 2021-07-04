@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
   asio::io_context io_ctx;
   asio::ip::tcp::resolver resolver(io_ctx);
 
-  auto results = resolver.resolve(host, "daytime");
+  auto results = resolver.resolve(host, "80");
 
   LOGI("endpoints list:");
   for (const auto& result : results) {
