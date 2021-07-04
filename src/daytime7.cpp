@@ -18,9 +18,9 @@ std::string make_daytime_string() {
 
 class TcpConnection : public std::enable_shared_from_this<TcpConnection> {
  public:
-  using Pointer = std::shared_ptr<TcpConnection>;
+  using connection_t = std::shared_ptr<TcpConnection>;
 
-  static Pointer Create(asio::io_context& io_ctx) { return Pointer{new TcpConnection(io_ctx)}; }
+  static connection_t Create(asio::io_context& io_ctx) { return connection_t{new TcpConnection(io_ctx)}; }
 
   ~TcpConnection() {}
 
@@ -63,7 +63,7 @@ class TcpServer {
                            std::bind(&TcpServer::accept, this, connection, std::placeholders::_1));
   }
 
-  void accept(TcpConnection::Pointer connection, const asio::error_code& ec) {
+  void accept(TcpConnection::connection_t connection, const asio::error_code& ec) {
     if (!ec) {
       connection->Start();
       start_accept();
