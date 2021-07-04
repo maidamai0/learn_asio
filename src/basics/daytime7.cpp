@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 
-#include "log.hpp"
+#include "common/log.hpp"
 
 using asio::ip::tcp;
 using asio::ip::udp;

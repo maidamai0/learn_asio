@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 
-#include "log.hpp"
+#include "common/log.hpp"
 
 std::string make_daytime_string() {
   time_t now = time(nullptr);

@@ -4,7 +4,7 @@
 #include <functional>
 #include <string_view>
 
-#include "log.hpp"
+#include "common/log.hpp"
 
 void handler(asio::error_code, std::string_view name) {
   TRACE;

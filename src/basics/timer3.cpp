@@ -3,7 +3,7 @@
 #include <functional>
 #include <iostream>
 
-#include "log.hpp"
+#include "common/log.hpp"
 
 /**
  * @brief mimic std::bind

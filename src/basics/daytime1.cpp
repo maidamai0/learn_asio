@@ -7,8 +7,8 @@
 #include <iostream>
 #include <thread>
 
+#include "common/log.hpp"
 #include "cxxopts.hpp"
-#include "log.hpp"
 
 int main(int argc, char** argv) {
   std::string host;

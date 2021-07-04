@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 
-#include "log.hpp"
+#include "common/log.hpp"
 
 int main() {
   using namespace std::chrono_literals;
