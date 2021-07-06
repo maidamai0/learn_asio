@@ -14,3 +14,7 @@
 	path = deps/cxxopts
 	url = https://github.com/jarro2783/cxxopts.git
 	branch = master
+[submodule "deps/llhttp"]
+	path = deps/llhttp
+	url = https://github.com/nodejs/llhttp
+	branch = master
