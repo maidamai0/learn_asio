@@ -35,7 +35,8 @@ void connection::handle_read(const asio::error_code& ec, std::size_t bytes_trans
 
   // TODO (tonghao): 2021-07-04
   // complete this
-  (void)bytes_transferred;
+  request_parser_.parse(buffer_.data(), bytes_transferred);
+
   response_ = response::stock_response(response::status_code::not_implemented);
   socket_.async_write_some(response_.to_buffers(),
                            std::bind(&connection::handle_write, this, std::placeholders::_1));
