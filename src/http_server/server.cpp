@@ -45,6 +45,8 @@ void server::hanlde_accept(const asio::error_code& ec) {
   start_accept();
 }
 
+// FIXME (tonghao): 2021-07-09
+// not called
 void server::hanlde_stop(const asio::error_code& ec, int sig) {
   if (ec) {
     LOGE("{}", ec.message());
