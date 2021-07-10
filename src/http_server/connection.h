@@ -20,7 +20,7 @@ class connection_manager;
 class connection : public std::enable_shared_from_this<connection> {
  public:
   using pointer = std::shared_ptr<connection>;
-  static constexpr auto buffer_size = 8192;
+  static constexpr auto buffer_size = 1024;
   no_copy(connection);
   connection(asio::io_context& io_context, connection_manager& manager, request_handler& handler);
   asio::ip::tcp::socket& socket();

@@ -1,10 +1,13 @@
 #include "connection.h"
 
+#include <exception>
 #include <functional>
+#include <system_error>
 
 #include "asio/error.hpp"
 #include "asio/error_code.hpp"
 #include "asio/ip/tcp.hpp"
+#include "common/log.hpp"
 #include "connection_manager.h"
 
 namespace http {
@@ -33,10 +36,17 @@ void connection::handle_read(const asio::error_code& ec, std::size_t bytes_trans
     return;
   }
 
-  // TODO (tonghao): 2021-07-04
-  // complete this
-  request_parser_.parse(buffer_.data(), bytes_transferred);
+  const auto ret = request_parser_.parse(buffer_.data(), bytes_transferred);
+  if (ret == message_status::want_more) {
+    return start();
+  } else if (ret == message_status::faild) {
+    // TODO (tonghao): 2021-07-10
+    // complete me
+    return;
+  }
 
+  // TODO (tonghao): 2021-07-10
+  // complete this
   response_ = response::stock_response(response::status_code::not_implemented);
   socket_.async_write_some(response_.to_buffers(),
                            std::bind(&connection::handle_write, this, std::placeholders::_1));
@@ -48,7 +58,11 @@ void connection::handle_write(const asio::error_code& ec) {
     return;
   }
 
-  socket_.shutdown(asio::ip::tcp::socket::shutdown_both);
+  try {
+    socket_.shutdown(asio::ip::tcp::socket::shutdown_both);
+  } catch (const std::exception& e) {
+    LOGW("shutdown socket failed:{}", e.what());
+  }
 }
 
 }  // namespace server

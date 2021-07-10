@@ -42,7 +42,11 @@ int main(int argc, char** argv) {
                      << " HTTP/1.0\r\n";
       request_stream << "Host: localhost\r\n";
       request_stream << "Accept: */*\r\n";
-      request_stream << "Connection: close\r\n\r\n";
+      request_stream << "Content-Type: text/plain; charset=utf-8\r\n";
+      request_stream << "Content-Length: 2048\r\n";
+      request_stream << "\r\n\r\n";
+
+      request_stream << std::string(2048, 'a');
 
       asio::write(socket, request);
 

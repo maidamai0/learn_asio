@@ -14,7 +14,7 @@
 	path = deps/cxxopts
 	url = https://github.com/jarro2783/cxxopts.git
 	branch = master
-[submodule "deps/llhttp"]
-	path = deps/llhttp
-	url = https://github.com/nodejs/llhttp
+[submodule "deps/magic_enum"]
+	path = deps/magic_enum
+	url = https://github.com/Neargye/magic_enum.git
 	branch = master

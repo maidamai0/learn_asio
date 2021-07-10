@@ -12,6 +12,7 @@
  */
 
 #include <cstddef>
+#include <memory>
 #include <string>
 #include <string_view>
 #include <unordered_map>
@@ -19,13 +20,15 @@
 namespace http {
 namespace server {
 class request;
+
+enum class message_status { complete, want_more, faild };
 class http_message {
   using headers_t = std::unordered_map<std::string, std::string>;
   class impl;
   friend class impl;
 
  public:
-  enum class method { GET, POST, PUT, DELETE };
+  enum class method { GET, POST, PUT, DELETE, INVALID };
 
   static constexpr auto kHeader = "Host";
   static constexpr auto kAcceptEncoding = "Accept-Encoding";
@@ -44,19 +47,31 @@ class http_message {
   static constexpr auto kContentType = "Content-Type";
 
  protected:
-  http_message() = default;
-  void parse(const char* data, size_t len);
+  http_message();
+  ~http_message();
+  void reset();
+  message_status parse(const char* data, size_t len);
+  void print();
+
+ private:
+  void save_headers();
 
  protected:
-  impl* impl_ = nullptr;
+  std::unique_ptr<impl> pimpl_;
 
-  int http_major = 0;
-  int http_minor = 0;
+  method method_ = method::INVALID;
+  int http_major_ = 0;
+  int http_minor_ = 0;
   std::string url_;
   headers_t headers_;
-  std::string current_header_;
-  const char* body_start_ = nullptr;
-  size_t bodu_len_ = 0;
+  std::string body_;
+  int status_ = 0;
+  bool upgrade_ = false;  // websocket?
+  bool keep_alive_ = false;
+
+  std::string current_header_field_;
+  std::string current_header_value_;
+  message_status message_status_ = message_status::want_more;
 };
 }  // namespace server
 }  // namespace http

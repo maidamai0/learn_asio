@@ -54,5 +54,6 @@ include_directories(deps/spdlog/include/)
 link_libraries(spdlog)
 
 include_directories(deps/cxxopts/include)
+include_directories(deps/magic_enum/include)
 
 add_subdirectory(src)

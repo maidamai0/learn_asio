@@ -9,8 +9,8 @@
 
 namespace http {
 namespace server {
-void request_parser::parse(const char* data, size_t len) {
-  http_message::parse(data, len);
+message_status request_parser::parse(const char* data, size_t len) {
+  return http_message::parse(data, len);
 }
 
 }  // namespace server
