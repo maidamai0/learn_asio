@@ -40,14 +40,13 @@ void connection::handle_read(const asio::error_code& ec, std::size_t bytes_trans
   if (ret == message_status::want_more) {
     return start();
   } else if (ret == message_status::faild) {
+    response_ = response::stock_response(response::status_code::bad_request);
+  } else {
     // TODO (tonghao): 2021-07-10
-    // complete me
-    return;
+    // complete this
+    response_ = response::stock_response(response::status_code::not_implemented);
   }
 
-  // TODO (tonghao): 2021-07-10
-  // complete this
-  response_ = response::stock_response(response::status_code::not_implemented);
   socket_.async_write_some(response_.to_buffers(),
                            std::bind(&connection::handle_write, this, std::placeholders::_1));
 }

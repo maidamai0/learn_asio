@@ -8,7 +8,6 @@
 #include "asio/io_context.hpp"
 #include "asio/ip/tcp.hpp"
 #include "common/macro.hpp"
-#include "request.h"
 #include "request_handler.h"
 #include "request_parser.h"
 #include "response.h"
@@ -36,7 +35,6 @@ class connection : public std::enable_shared_from_this<connection> {
   connection_manager& connection_manager_;
   request_handler& request_handler_;
   std::array<char, buffer_size> buffer_;
-  request request_;
   request_parser request_parser_;
   response response_;
 };

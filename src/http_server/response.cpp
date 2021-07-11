@@ -75,12 +75,12 @@ const char crlf[] = {'\r', '\n'};
 std::vector<asio::const_buffer> response::to_buffers() {
   std::vector<asio::const_buffer> buffers;
   buffers.push_back(status_strings::to_buffer(status));
-  for (const auto& header : headers) {
-    buffers.push_back(asio::buffer(header.name));
-    buffers.push_back(asio::buffer(misc_strings::name_value_separator));
-    buffers.push_back(asio::buffer(header.value));
-    buffers.push_back(asio::buffer(misc_strings::crlf));
-  }
+  // for (const auto& header : headers) {
+  //   buffers.push_back(asio::buffer(header.name));
+  //   buffers.push_back(asio::buffer(misc_strings::name_value_separator));
+  //   buffers.push_back(asio::buffer(header.value));
+  //   buffers.push_back(asio::buffer(misc_strings::crlf));
+  // }
   buffers.push_back(asio::buffer(misc_strings::crlf));
   buffers.push_back(asio::buffer(content));
   return buffers;
@@ -210,11 +210,11 @@ response response::stock_response(response::status_code status) {
   response rep;
   rep.status = status;
   rep.content = stock_replies::to_string(status);
-  rep.headers.resize(2);
-  rep.headers[0].name = "Content-Length";
-  rep.headers[0].value = std::to_string(rep.content.size());
-  rep.headers[1].name = "Content-Type";
-  rep.headers[1].value = "text/html";
+  // rep.headers.resize(2);
+  // rep.headers[0].name = "Content-Length";
+  // rep.headers[0].value = std::to_string(rep.content.size());
+  // rep.headers[1].name = "Content-Type";
+  // rep.headers[1].value = "text/html";
   return rep;
 }
 

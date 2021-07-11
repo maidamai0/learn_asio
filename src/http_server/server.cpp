@@ -37,8 +37,8 @@ void server::hanlde_accept(const asio::error_code& ec) {
   if (ec) {
     LOGW("accepted a connection with error: {}", ec.message());
   } else {
-    LOGI("new client:{}:{}", new_connection_->socket().remote_endpoint().address().to_string(),
-         new_connection_->socket().remote_endpoint().port());
+    const auto& remote = new_connection_->socket().remote_endpoint();
+    LOGI("new client:{}:{}", remote.address().to_string(), remote.port());
     connection_manager_.start(new_connection_);
   }
 

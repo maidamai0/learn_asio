@@ -3,7 +3,6 @@
 #include <vector>
 
 #include "asio/buffer.hpp"
-#include "header.hpp"
 
 namespace http::server {
 struct response {
@@ -26,7 +25,6 @@ struct response {
     service_unavailable = 503
   };
   status_code status = status_code::not_implemented;
-  std::vector<header> headers;
   std::string content;
   std::vector<asio::const_buffer> to_buffers();
   static response stock_response(const status_code code);
