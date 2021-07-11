@@ -46,19 +46,16 @@ class http_message {
   static constexpr auto kContentLength = "Content-Length";
   static constexpr auto kContentType = "Content-Type";
 
- protected:
   http_message();
   ~http_message();
   void reset();
   message_status parse(const char* data, size_t len);
-  void print();
 
  private:
+  void print();
   void save_headers();
 
- protected:
-  std::unique_ptr<impl> pimpl_;
-
+ public:
   method method_ = method::INVALID;
   int http_major_ = 0;
   int http_minor_ = 0;
@@ -69,6 +66,8 @@ class http_message {
   bool upgrade_ = false;  // websocket?
   bool keep_alive_ = false;
 
+ private:
+  std::unique_ptr<impl> pimpl_;
   std::string current_header_field_;
   std::string current_header_value_;
   message_status message_status_ = message_status::want_more;

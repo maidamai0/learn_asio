@@ -8,8 +8,8 @@
 #include "asio/io_context.hpp"
 #include "asio/ip/tcp.hpp"
 #include "common/macro.hpp"
+#include "request.h"
 #include "request_handler.h"
-#include "request_parser.h"
 #include "response.h"
 
 namespace http {
@@ -27,6 +27,7 @@ class connection : public std::enable_shared_from_this<connection> {
   void stop();
 
  private:
+  void dispatch();
   void handle_read(const asio::error_code&, std::size_t bytes_transferred);
   void handle_write(const asio::error_code& ec);
 
@@ -35,7 +36,7 @@ class connection : public std::enable_shared_from_this<connection> {
   connection_manager& connection_manager_;
   request_handler& request_handler_;
   std::array<char, buffer_size> buffer_;
-  request_parser request_parser_;
+  request request_;
   response response_;
 };
 }  // namespace server

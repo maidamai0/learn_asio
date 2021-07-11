@@ -1,4 +1,4 @@
-#include "request_parser.h"
+#include "request.h"
 
 #include <array>
 #include <cstddef>
@@ -9,7 +9,7 @@
 
 namespace http {
 namespace server {
-message_status request_parser::parse(const char* data, size_t len) {
+message_status request::parse(const char* data, size_t len) {
   return http_message::parse(data, len);
 }
 

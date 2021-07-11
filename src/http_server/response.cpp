@@ -1,12 +1,14 @@
 
 #include "response.h"
 
+#include <ctime>
+#include <sstream>
 #include <string>
+#include <iomanip>
 
 namespace http::server {
 
 namespace status_strings {
-
 const std::string ok = "HTTP/1.0 200 OK\r\n";
 const std::string created = "HTTP/1.0 201 Created\r\n";
 const std::string accepted = "HTTP/1.0 202 Accepted\r\n";
@@ -75,12 +77,20 @@ const char crlf[] = {'\r', '\n'};
 std::vector<asio::const_buffer> response::to_buffers() {
   std::vector<asio::const_buffer> buffers;
   buffers.push_back(status_strings::to_buffer(status));
-  // for (const auto& header : headers) {
-  //   buffers.push_back(asio::buffer(header.name));
-  //   buffers.push_back(asio::buffer(misc_strings::name_value_separator));
-  //   buffers.push_back(asio::buffer(header.value));
-  //   buffers.push_back(asio::buffer(misc_strings::crlf));
-  // }
+
+  std::time_t now;
+  std::time(&now);
+  std::stringstream ss;
+  ss << std::put_time(std::gmtime(&now), "%a, %d %b %Y %T GMT");
+  headers_[kDate] = ss.str();
+  headers_[kContentLength] = std::to_string(content.size());
+
+  for (const auto& header : headers_) {
+    buffers.push_back(asio::buffer(header.first));
+    buffers.push_back(asio::buffer(misc_strings::name_value_separator));
+    buffers.push_back(asio::buffer(header.second));
+    buffers.push_back(asio::buffer(misc_strings::crlf));
+  }
   buffers.push_back(asio::buffer(misc_strings::crlf));
   buffers.push_back(asio::buffer(content));
   return buffers;
@@ -206,16 +216,17 @@ std::string to_string(response::status_code status) {
 
 }  // namespace stock_replies
 
-response response::stock_response(response::status_code status) {
-  response rep;
-  rep.status = status;
-  rep.content = stock_replies::to_string(status);
-  // rep.headers.resize(2);
-  // rep.headers[0].name = "Content-Length";
-  // rep.headers[0].value = std::to_string(rep.content.size());
-  // rep.headers[1].name = "Content-Type";
-  // rep.headers[1].value = "text/html";
-  return rep;
+response::response(const status_code code) {
+  status = code;
+  content = stock_replies::to_string(status);
+  headers_[kContentLength] = std::to_string(content.size());
+}
+
+response::response() {
+  status = status_code::ok;
+  headers_[kContentType] = "text/json";
+  headers_[kServer] = "tonghao&asio";
+  headers_[kConnection] = "close";
 }
 
 }  // namespace http::server

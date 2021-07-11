@@ -8,9 +8,9 @@
 
 namespace http {
 namespace server {
-class request_parser : public http_message {
+class request : public http_message {
  public:
-  request_parser() = default;
+  request() = default;
   message_status parse(const char* data, std::size_t len);
   std::string print() const;
 };

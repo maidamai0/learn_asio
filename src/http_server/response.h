@@ -3,9 +3,11 @@
 #include <vector>
 
 #include "asio/buffer.hpp"
+#include "common/macro.hpp"
+#include "common/message.h"
 
 namespace http::server {
-struct response {
+struct response : public http_message {
   enum class status_code {
     ok = 200,
     created = 201,
@@ -24,9 +26,13 @@ struct response {
     bad_gateway = 502,
     service_unavailable = 503
   };
+
+  response(const status_code code);
+  response();
+  no_copy(response);
+
   status_code status = status_code::not_implemented;
   std::string content;
   std::vector<asio::const_buffer> to_buffers();
-  static response stock_response(const status_code code);
 };
 }  // namespace http::server
