@@ -18,6 +18,8 @@
 #include "spdlog/sinks/stdout_sinks.h"
 #include "spdlog/spdlog.h"
 
+#include "common/singleton.h"
+
 #define LOGD SPDLOG_DEBUG
 #define LOGI SPDLOG_INFO
 #define LOGW SPDLOG_WARN
@@ -28,6 +30,8 @@
 namespace log_details {
 
 class Log {
+  enable_singleton(Log)
+
  public:
   Log() {
     auto file_sink =
@@ -47,8 +51,6 @@ class Log {
 
   ~Log() { LOGI("Application {} terminated", APP_NAME); }
 };
-
-const Log log;
 
 class ScopeTrace {
  public:

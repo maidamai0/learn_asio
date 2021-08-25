@@ -1,3 +1,4 @@
+#pragma once
 
 /**
  * @brief disable copy constructor and assignment operator

@@ -3,6 +3,7 @@
 #include "server.h"
 
 int main(int argc, char** argv) {
+  make_singleton<log_details::Log>();
   try {
     int port = 5000;
     cxxopts::Options options("http_server", "A HTTP server");
