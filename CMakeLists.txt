@@ -2,6 +2,13 @@ cmake_minimum_required(VERSION 3.16)
 
 project(learn_asio)
 
+# update submodules
+add_custom_target(update_dependencies
+    COMMAND ${PROXY} git submodule update --init
+    COMMAND ${PROXY} git submodule foreach git pull
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+)
+
 # asio definition
 add_definitions(-DASIO_STANDALONE -DASIO_NO_DEPRECATED -DASIO_HAS_MOVE)
 
