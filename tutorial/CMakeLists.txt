@@ -1,0 +1,5 @@
+file(GLOB srcs *.cpp)
+foreach(src ${srcs})
+  get_filename_component(_name ${src} NAME_WLE)
+  add_executable(${_name} ${src})
+endforeach()
