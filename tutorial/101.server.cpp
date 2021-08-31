@@ -21,6 +21,7 @@ int main(int argc, char* argv[]) {
     while (true) {
       asio::ip::tcp::socket socket(io_context);
       acceptor.accept(socket);
+      std::cout << "accepted connection: " << socket.remote_endpoint() << '\n';
       asio::write(socket, asio::buffer("Hello, world!\n"));
     }
   } catch (const std::exception& e) {
