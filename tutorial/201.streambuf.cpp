@@ -17,5 +17,6 @@ int main() {
   std::ostream os(&streambuf);
   os << "hello world";
   socket.send(streambuf.data());
+  io_context.run();
   return 0;
 }
