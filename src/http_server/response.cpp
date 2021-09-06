@@ -81,7 +81,13 @@ std::vector<asio::const_buffer> response::to_buffers() {
   std::time_t now;
   std::time(&now);
   std::stringstream ss;
-  ss << std::put_time(std::gmtime(&now), "%a, %d %b %Y %T GMT");
+  tm t;
+#ifdef _WIN32
+  gmtime_s(&t, &now);
+#else
+  gmtime_r(&now, &t);
+#endif
+  ss << std::put_time(&t, "%a, %d %b %Y %T GMT");
   headers_[kDate] = ss.str();
   headers_[kContentLength] = std::to_string(content.size());
 

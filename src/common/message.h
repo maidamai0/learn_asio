@@ -28,7 +28,8 @@ class http_message {
   friend class impl;
 
  public:
-  enum class method { GET, POST, PUT, DELETE, INVALID };
+  // stupid winnt.h define a macro DELETE
+  enum class method { GET, POST, PUT, DEL, INVALID };
 
   static constexpr auto kHeader = "Host";
   static constexpr auto kAcceptEncoding = "Accept-Encoding";

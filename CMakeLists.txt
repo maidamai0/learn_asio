@@ -10,7 +10,11 @@ add_custom_target(update_dependencies
 )
 
 # asio definition
-add_definitions(-DASIO_STANDALONE -DASIO_NO_DEPRECATED -DASIO_HAS_MOVE)
+add_compile_definitions(ASIO_STANDALONE ASIO_NO_DEPRECATED ASIO_HAS_MOVE)
+if(WIN32)
+    add_compile_definitions(_WIN32_WINNT=0x0600)
+endif()
+
 
 # generate compile_commands.json if possible
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

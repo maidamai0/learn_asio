@@ -43,7 +43,7 @@ void connection::dispatch() {
     case http_message::method::PUT:
       request_handler_.on_put(request_, response_);
       break;
-    case http_message::method::DELETE:
+    case http_message::method::DEL:
       request_handler_.on_delete(request_, response_);
       break;
     default:

@@ -166,7 +166,7 @@ message_status http_message::parse(const char* data, size_t len) {
         method_ = method::PUT;
         break;
       case http_method::HTTP_DELETE:
-        method_ = method::DELETE;
+        method_ = method::DEL;
         break;
       default:
         LOGW("unknow http method:{}", http_method_str(_method));
