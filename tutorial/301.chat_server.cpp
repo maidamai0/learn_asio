@@ -6,8 +6,11 @@
 
 #include <asio/io_context.hpp>
 #include <asio/ip/tcp.hpp>
+#include "asio/buffer.hpp"
 #include "asio/error_code.hpp"
 #include "asio/ip/basic_endpoint.hpp"
+#include "asio/read.hpp"
+#include "asio/read_until.hpp"
 #include "asio/write.hpp"
 
 using socket_t = asio::ip::tcp::socket;
@@ -22,28 +25,22 @@ class session : public std::enable_shared_from_this<session> {
 
  public:
   session(asio::io_context& io_context) : socket_(io_context), local_id_(global_id_++) {}
+  ~session() = default;
 
-  ~session() { std::cout << "session destroyed" << std::endl; }
-
-  void start() {
-    std::cout << "new session created: " << local_id_ << std::endl;
-    chat();
-  }
-
+  void start() { chat(); }
   socket_t& socket() { return socket_; }
 
  private:
   void chat() {
-    auto self(shared_from_this());
-    socket_.async_read_some(asio::buffer(buffer_), [self](const asio::error_code& error,
-                                                          std::size_t bytes_transferred) {
-      if (error) {
-        std::cout << self->name() << " error: " << error.message() << std::endl;
-        // socket_.close();
-      } else {
-        self->on_message(string_t(self->buffer_.data(), bytes_transferred));
-      }
-    });
+    socket_.async_read_some(
+        asio::buffer(buffer_),
+        [self = shared_from_this()](const asio::error_code& error, std::size_t bytes_transferred) {
+          if (error) {
+            std::cout << self->name() << " error: " << error.message() << std::endl;
+          } else {
+            self->on_message(string_t(self->buffer_.data(), bytes_transferred));
+          }
+        });
   }
 
   void on_message(const string_t& message) {
@@ -53,22 +50,23 @@ class session : public std::enable_shared_from_this<session> {
 
   void send_message(const string_t& message) {
     std::cout << name() << " sending message: " << message << std::endl;
-    auto self(shared_from_this());
-    asio::async_write(socket_, asio::buffer(message),
-                      [self](const asio::error_code& error, std::size_t bytes_transferred) {
-                        (void)bytes_transferred;
-                        if (error) {
-                          self->socket_.close();
-                        } else {
-                          self->chat();
-                          std::cout << self->name() << " message sent" << std::endl;
-                        }
-                      });
+    asio::async_write(
+        socket_, asio::buffer(message),
+        [self = shared_from_this()](const asio::error_code& error, std::size_t bytes_transferred) {
+          (void)bytes_transferred;
+          if (error) {
+            std::cerr << self->name() << " error: " << error.message() << std::endl;
+            self->socket_.close();
+          } else {
+            self->chat();
+            std::cout << self->name() << " message sent" << std::endl;
+          }
+        });
   }
 
   std::string name() const {
     std::stringstream ss;
-    ss << "session [" << local_id_ << "]";
+    ss << "[" << socket_.local_endpoint() << "]";
     return ss.str();
   }
 
@@ -104,9 +102,24 @@ class server {
     });
   }
 
+  void broadcast(const std::string& message) {
+    for (auto& session : sessions_) {
+      asio::async_write(session->socket(), asio::buffer(message),
+                        [session](const asio::error_code& error, size_t bytes_transferred) {
+                          (void)bytes_transferred;
+                          if (error) {
+                            std::cerr << "error: " << error.message() << std::endl;
+                          } else {
+                            std::cout << "message sent" << std::endl;
+                          }
+                        });
+    }
+  }
+
  private:
   asio::io_context io_context_;
   asio::ip::tcp::acceptor acceptor_;
+  std::vector<session_ptr> sessions_;
 };
 
 int main() {

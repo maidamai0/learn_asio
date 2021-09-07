@@ -1,4 +1,3 @@
-#include <vcruntime.h>
 #include "asio/error.hpp"
 #include "asio/error_code.hpp"
 #include "asio/io_context.hpp"
@@ -29,34 +28,39 @@ class session : public std::enable_shared_from_this<session> {
                            });
   }
 
-  void write(size_t bytes_transferred) {
+  void write(const std::string& message) {
     asio::async_write(
-        socket_, buffer_.data(),
+        socket_, asio::buffer(message),
         [self = shared_from_this()](const asio::error_code& ec, size_t bytes_transferred) {
           self->on_write(ec, bytes_transferred);
         });
   }
 
   void on_read(const asio::error_code& ec, std::size_t bytes_transferred) {
-    if (!ec) {
-      write(bytes_transferred);
-      read();
-    } else {
-      socket_.close();
-      on_error(ec);
+    if (ec) {
+      return on_error(ec);
     }
+
+    std::string line;
+    std::istream is(&buffer_);
+    std::getline(is, line);
+    write(std::move(line));
+    buffer_.consume(bytes_transferred);
+    read();
   }
 
   void on_write(const asio::error_code& ec, std::size_t bytes_transferred) {
-    if (!ec) {
-      buffer_.consume(bytes_transferred);
+    if (ec) {
+      return on_error(ec);
     }
 
-    socket_.close();
-    on_error(ec);
+    (void)bytes_transferred;
   }
 
-  void on_error(const asio::error_code& ec) { std::cerr << "Error: " << ec.message() << std::endl; }
+  void on_error(const asio::error_code& ec) {
+    socket_.close();
+    std::cerr << "Error: " << ec.message() << ", closed" << std::endl;
+  }
 
  private:
   socket_t socket_;
@@ -74,16 +78,16 @@ class server {
  private:
   void accept() {
     auto new_session = std::make_shared<session>(io_context_);
-    acceptor_.async_accept(new_session->socket(), [new_session, this](const asio::error_code& error,
-                                                                      size_t bytes_transferred) {
-      if (error) {
-        std::cout << "Error: " << error.message() << std::endl;
-      } else {
-        std::cout << "Accepted " << new_session->socket().remote_endpoint() << std::endl;
-        new_session->start();
-        accept();
-      }
-    });
+    acceptor_.async_accept(
+        new_session->socket(), [new_session, this](const asio::error_code& error) {
+          if (error) {
+            std::cout << "Error: " << error.message() << std::endl;
+          } else {
+            std::cout << "Accepted " << new_session->socket().remote_endpoint() << std::endl;
+            new_session->start();
+            accept();
+          }
+        });
   }
 
  private:
