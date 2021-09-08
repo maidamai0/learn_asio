@@ -14,5 +14,5 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ..
+        cmake -DASIO_ENABLE_HANDLER_TRACKING=OFF ..
         cmake --build .

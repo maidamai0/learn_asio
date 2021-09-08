@@ -10,11 +10,19 @@ add_custom_target(update_dependencies
 )
 
 # asio definition
-add_compile_definitions(ASIO_STANDALONE ASIO_NO_DEPRECATED ASIO_HAS_MOVE ASIO_ENABLE_HANDLER_TRACKING)
+add_compile_definitions(ASIO_STANDALONE ASIO_NO_DEPRECATED ASIO_HAS_MOVE)
 if(WIN32)
     add_compile_definitions(_WIN32_WINNT=0x0600)
 endif()
 
+# options
+option(ASIO_ENABLE_HANDLER_TRACKING "Enable ASIO_ENABLE_HANDLER_TRACKING" ON)
+if(ASIO_ENABLE_HANDLER_TRACKING)
+    message(STATUS "ASIO_ENABLE_HANDLER_TRACKING is enabled")
+    add_compile_definitions(ASIO_ENABLE_HANDLER_TRACKING)
+else()
+    message(STATUS "ASIO_ENABLE_HANDLER_TRACKING is disabled")
+endif()
 
 # generate compile_commands.json if possible
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
