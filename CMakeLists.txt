@@ -10,7 +10,7 @@ add_custom_target(update_dependencies
 )
 
 # asio definition
-add_compile_definitions(ASIO_STANDALONE ASIO_NO_DEPRECATED ASIO_HAS_MOVE)
+add_compile_definitions(ASIO_STANDALONE ASIO_NO_DEPRECATED ASIO_HAS_MOVE ASIO_ENABLE_HANDLER_TRACKING)
 if(WIN32)
     add_compile_definitions(_WIN32_WINNT=0x0600)
 endif()
