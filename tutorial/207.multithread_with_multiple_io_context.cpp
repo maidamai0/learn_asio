@@ -15,7 +15,8 @@ class io_context_group {
   io_context_group(const size_t size) {
     for (size_t i = 0; i < size; ++i) {
       io_contexts_.emplace_back(std::make_shared<io_context_t>());
-      work_guards_.emplace_back(std::make_shared<work_guard_t>());
+      work_guards_.emplace_back(
+          std::make_shared<work_guard_t>(io_contexts_.back()->get_executor()));
     }
   }
 
