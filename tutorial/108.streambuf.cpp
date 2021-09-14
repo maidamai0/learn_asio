@@ -5,18 +5,28 @@
 #include "asio/ip/tcp.hpp"
 #include "asio/streambuf.hpp"
 
+#include <cstring>
 #include <iostream>
+#include <istream>
 #include <ostream>
 
 int main() {
-  asio::io_context io_context;
   asio::streambuf streambuf;
-  asio::ip::tcp::socket socket(io_context);
-  socket.connect(asio::ip::tcp::endpoint(asio::ip::make_address("127.0.0.1"), 5678));
+  {
+    auto view = streambuf.prepare(64);
+    std::memcpy(view.data(), "Hello, world!", 13);
+    streambuf.commit(13);
+    std::cout << std::istream(&streambuf).rdbuf() << std::endl;
+    streambuf.consume(13);
+  }
 
-  std::ostream os(&streambuf);
-  os << "hello world";
-  socket.send(streambuf.data());
-  io_context.run();
+  {
+    std::ostream os(&streambuf);
+    os << "hello world";
+    streambuf.commit(os.rdbuf()->in_avail());
+    std::cout << std::istream(&streambuf).rdbuf() << std::endl;
+    streambuf.consume(os.rdbuf()->in_avail());
+  }
+
   return 0;
 }
